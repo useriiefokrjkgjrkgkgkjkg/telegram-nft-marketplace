@@ -56,9 +56,14 @@ const shimmerAnimation = keyframes`
 
 export default function Home() {
   const [balance] = useState('0.087');
-  const bgColor = useColorModeValue('gray.900', 'gray.900');
-  const gradientBg = 'linear-gradient(to bottom, #1a1c2a, #0d1117)';
-  const panelBg = 'linear-gradient(to bottom, #1E1E2D, #1a1c2a)';
+  
+  // Новые градиенты и цвета
+  const gradientBg = 'linear-gradient(135deg, #0F1322 0%, #131B2E 50%, #1A1A2E 100%)';
+  const panelBg = 'linear-gradient(to bottom, rgba(29, 32, 43, 0.95), rgba(16, 20, 35, 0.95))';
+  const neonBlue = '#00F5FF';
+  const neonPink = '#FF10F0';
+  const accentColor = neonBlue;
+  const hoverAccentColor = neonPink;
 
   // Устанавливаем высоту для мини-приложения Telegram
   useEffect(() => {
@@ -92,16 +97,27 @@ export default function Home() {
           left: 0,
           right: 0,
           height: '2px',
-          background: 'linear-gradient(90deg, transparent, purple.400, transparent)',
+          background: `linear-gradient(90deg, transparent, ${neonBlue}, transparent)`,
           animation: `${shimmerAnimation} 3s infinite linear`
+        },
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.1) 0%, transparent 60%)',
+          pointerEvents: 'none'
         }
       }}
     >
       {/* Верхняя панель */}
       <Box 
-        borderBottom="1px solid" 
-        borderColor="whiteAlpha.100" 
+        borderBottom="1px solid"
+        borderColor="rgba(255, 255, 255, 0.1)"
         bgImage={panelBg}
+        backdropFilter="blur(10px)"
         animation={`${fadeInAnimation} 0.5s ease-out`}
       >
         <Container maxW="container.lg" py={2}>
@@ -113,13 +129,18 @@ export default function Home() {
             >
               <Text 
                 fontSize="lg" 
-                color="purple.400"
+                color={accentColor}
                 animation={`${floatAnimation} 2s ease-in-out infinite`}
+                textShadow={`0 0 10px ${accentColor}`}
               >▼</Text>
-              <Text fontSize="lg" color="purple.400">{balance}</Text>
+              <Text 
+                fontSize="lg" 
+                color={accentColor}
+                textShadow={`0 0 10px ${accentColor}`}
+              >{balance}</Text>
               <ChevronDownIcon 
                 boxSize={5} 
-                color="purple.400"
+                color={accentColor}
                 animation={`${pulseAnimation} 2s infinite`}
               />
             </HStack>
@@ -128,12 +149,16 @@ export default function Home() {
                 aria-label="Add balance"
                 icon={<AddIcon />}
                 size="sm"
-                bg="purple.500"
-                color="white"
+                bg={`${accentColor}22`}
+                color={accentColor}
                 borderRadius="full"
+                border="1px solid"
+                borderColor={`${accentColor}44`}
                 _hover={{ 
-                  bg: 'purple.400',
+                  bg: `${hoverAccentColor}33`,
+                  color: hoverAccentColor,
                   transform: 'scale(1.1)',
+                  borderColor: `${hoverAccentColor}66`
                 }}
                 transition="all 0.2s"
               />
@@ -141,28 +166,37 @@ export default function Home() {
                 aria-label="Subtract balance"
                 icon={<MinusIcon />}
                 size="sm"
-                bg="purple.500"
-                color="white"
+                bg={`${accentColor}22`}
+                color={accentColor}
                 borderRadius="full"
+                border="1px solid"
+                borderColor={`${accentColor}44`}
                 _hover={{ 
-                  bg: 'purple.400',
+                  bg: `${hoverAccentColor}33`,
+                  color: hoverAccentColor,
                   transform: 'scale(1.1)',
+                  borderColor: `${hoverAccentColor}66`
                 }}
                 transition="all 0.2s"
               />
               <Button
-                bg="purple.500"
-                color="white"
+                bg={`${accentColor}22`}
+                color={accentColor}
                 size="sm"
+                border="1px solid"
+                borderColor={`${accentColor}44`}
                 _hover={{ 
-                  bg: 'purple.400',
+                  bg: `${hoverAccentColor}33`,
+                  color: hoverAccentColor,
                   transform: 'scale(1.02)',
+                  borderColor: `${hoverAccentColor}66`
                 }}
                 transition="all 0.2s"
                 borderRadius="full"
                 px={4}
                 leftIcon={<Text as="span" fontSize="md">▼</Text>}
-                animation={`${glowAnimation} 2s infinite`}
+                textShadow={`0 0 10px ${accentColor}`}
+                boxShadow={`0 0 20px ${accentColor}33`}
               >
                 Connect Wallet
               </Button>
@@ -173,9 +207,10 @@ export default function Home() {
 
       {/* Фильтры */}
       <Box 
-        borderBottom="1px solid" 
-        borderColor="whiteAlpha.100" 
+        borderBottom="1px solid"
+        borderColor="rgba(255, 255, 255, 0.1)"
         bgImage={panelBg}
+        backdropFilter="blur(10px)"
         animation={`${fadeInAnimation} 0.5s ease-out 0.2s`}
         opacity="0"
         sx={{ animationFillMode: 'forwards' }}
@@ -189,15 +224,18 @@ export default function Home() {
                 </Text>
                 <Select
                   variant="filled"
-                  bg="whiteAlpha.50"
+                  bg={`${accentColor}11`}
                   border="1px solid"
-                  borderColor="whiteAlpha.100"
+                  borderColor={`${accentColor}33`}
                   h="45px"
                   pt="3"
                   color="white"
                   icon={<ChevronDownIcon />}
                   defaultValue="all"
-                  _hover={{ bg: 'whiteAlpha.100' }}
+                  _hover={{ 
+                    bg: `${accentColor}22`,
+                    borderColor: `${accentColor}66`
+                  }}
                   transition="all 0.2s"
                 >
                   <option value="all">All</option>
@@ -209,15 +247,18 @@ export default function Home() {
                 </Text>
                 <Select
                   variant="filled"
-                  bg="whiteAlpha.50"
+                  bg={`${accentColor}11`}
                   border="1px solid"
-                  borderColor="whiteAlpha.100"
+                  borderColor={`${accentColor}33`}
                   h="45px"
                   pt="3"
                   color="white"
                   icon={<ChevronDownIcon />}
                   defaultValue="all"
-                  _hover={{ bg: 'whiteAlpha.100' }}
+                  _hover={{ 
+                    bg: `${accentColor}22`,
+                    borderColor: `${accentColor}66`
+                  }}
                   transition="all 0.2s"
                 >
                   <option value="all">All</option>
@@ -231,7 +272,7 @@ export default function Home() {
                 variant="ghost"
                 color="gray.400"
                 _hover={{ 
-                  color: 'purple.400',
+                  color: accentColor,
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
@@ -242,7 +283,7 @@ export default function Home() {
                 variant="ghost"
                 color="gray.400"
                 _hover={{ 
-                  color: 'purple.400',
+                  color: accentColor,
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
@@ -253,7 +294,7 @@ export default function Home() {
                 variant="ghost"
                 color="gray.400"
                 _hover={{ 
-                  color: 'purple.400',
+                  color: accentColor,
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
@@ -265,9 +306,10 @@ export default function Home() {
 
       {/* Корзина с прогрессом */}
       <Box 
-        borderBottom="1px solid" 
-        borderColor="whiteAlpha.100" 
+        borderBottom="1px solid"
+        borderColor="rgba(255, 255, 255, 0.1)"
         bgImage={panelBg}
+        backdropFilter="blur(10px)"
         animation={`${fadeInAnimation} 0.5s ease-out 0.4s`}
         opacity="0"
         sx={{ animationFillMode: 'forwards' }}
@@ -276,10 +318,10 @@ export default function Home() {
           <HStack>
             <Icon 
               as={FaShoppingCart} 
-              color="purple.400" 
+              color={accentColor}
               _hover={{ 
                 transform: 'scale(1.1) rotate(10deg)',
-                color: 'purple.300'
+                color: hoverAccentColor,
               }}
               transition="all 0.3s"
               cursor="pointer"
@@ -287,23 +329,23 @@ export default function Home() {
             <Progress
               value={0}
               size="sm"
-              colorScheme="purple"
               flex="1"
               borderRadius="full"
-              bg="whiteAlpha.100"
+              bg={`${accentColor}11`}
               sx={{
                 '& > div': {
                   transition: 'all 0.3s',
-                  background: 'linear-gradient(90deg, purple.500, purple.300)',
+                  background: `linear-gradient(90deg, ${accentColor}, ${hoverAccentColor})`,
                   backgroundSize: '200% 100%',
                   animation: `${shimmerAnimation} 2s infinite linear`
                 }
               }}
             />
             <Text 
-              color="gray.400" 
+              color={accentColor}
               fontWeight="bold"
               animation={`${pulseAnimation} 2s infinite`}
+              textShadow={`0 0 10px ${accentColor}`}
             >0</Text>
           </HStack>
         </Container>
@@ -313,11 +355,23 @@ export default function Home() {
       <Box 
         flex="1" 
         overflow="auto" 
-        bgImage={gradientBg} 
+        bgImage={gradientBg}
         position="relative"
         animation={`${fadeInAnimation} 0.5s ease-out 0.6s`}
         opacity="0"
-        sx={{ animationFillMode: 'forwards' }}
+        sx={{ 
+          animationFillMode: 'forwards',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.05) 0%, transparent 70%)',
+            pointerEvents: 'none'
+          }
+        }}
       >
         <Container maxW="container.lg" py={4}>
           <SimpleGrid columns={{ base: 2, md: 2 }} spacing={4}>
@@ -328,10 +382,15 @@ export default function Home() {
               left="50%" 
               transform="translate(-50%, -50%)"
               textAlign="center"
-              color="gray.500"
+              color="gray.400"
               animation={`${floatAnimation} 3s ease-in-out infinite`}
             >
-              <Text fontSize="lg">Пока никто не выставил NFT на продажу</Text>
+              <Text 
+                fontSize="lg"
+                textShadow={`0 0 20px ${accentColor}`}
+              >
+                Пока никто не выставил NFT на продажу
+              </Text>
             </Box>
           </SimpleGrid>
         </Container>
@@ -339,10 +398,11 @@ export default function Home() {
 
       {/* Нижняя навигация */}
       <Box 
-        borderTop="1px solid" 
-        borderColor="whiteAlpha.100"
+        borderTop="1px solid"
+        borderColor="rgba(255, 255, 255, 0.1)"
         py={3}
         bgImage={panelBg}
+        backdropFilter="blur(10px)"
         animation={`${fadeInAnimation} 0.5s ease-out 0.8s`}
         opacity="0"
         sx={{ animationFillMode: 'forwards' }}
@@ -351,11 +411,11 @@ export default function Home() {
           <HStack justify="space-between">
             <VStack 
               spacing={1} 
-              color="purple.400"
+              color={accentColor}
               cursor="pointer"
               _hover={{ 
                 transform: 'translateY(-2px) rotate(5deg)',
-                color: 'purple.300'
+                color: hoverAccentColor,
               }}
               transition="all 0.3s"
             >
@@ -364,14 +424,17 @@ export default function Home() {
                 boxSize={5}
                 animation={`${rotateAnimation} 10s linear infinite`}
               />
-              <Text fontSize="xs">Market</Text>
+              <Text 
+                fontSize="xs"
+                textShadow={`0 0 10px ${accentColor}`}
+              >Market</Text>
             </VStack>
             <VStack 
               spacing={1} 
               color="gray.500"
               cursor="pointer"
               _hover={{ 
-                color: 'purple.400',
+                color: hoverAccentColor,
                 transform: 'translateY(-2px) rotate(-5deg)'
               }}
               transition="all 0.3s"
@@ -388,7 +451,7 @@ export default function Home() {
               color="gray.500"
               cursor="pointer"
               _hover={{ 
-                color: 'purple.400',
+                color: hoverAccentColor,
                 transform: 'translateY(-2px) rotate(5deg)'
               }}
               transition="all 0.3s"
@@ -405,7 +468,7 @@ export default function Home() {
               color="gray.500"
               cursor="pointer"
               _hover={{ 
-                color: 'purple.400',
+                color: hoverAccentColor,
                 transform: 'translateY(-2px) rotate(-5deg)'
               }}
               transition="all 0.3s"
@@ -422,7 +485,7 @@ export default function Home() {
               color="gray.500"
               cursor="pointer"
               _hover={{ 
-                color: 'purple.400',
+                color: hoverAccentColor,
                 transform: 'translateY(-2px) rotate(5deg)'
               }}
               transition="all 0.3s"
