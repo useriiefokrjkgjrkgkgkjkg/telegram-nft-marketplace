@@ -18,17 +18,40 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { FaShoppingCart, FaGavel, FaGift, FaImages, FaChartLine, FaTrash, FaRandom } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [balance] = useState('0');
   const bgColor = useColorModeValue('gray.900', 'gray.900');
 
+  // Устанавливаем высоту для мини-приложения Telegram
+  useEffect(() => {
+    // @ts-ignore
+    if (window.Telegram?.WebApp) {
+      // @ts-ignore
+      window.Telegram.WebApp.expand();
+      // @ts-ignore
+      window.Telegram.WebApp.enableClosingConfirmation();
+    }
+  }, []);
+
   return (
-    <Box bg={bgColor} minH="100vh" color="white">
+    <Box 
+      bg={bgColor} 
+      height="100vh"
+      maxHeight="100vh"
+      overflow="hidden"
+      display="flex"
+      flexDirection="column"
+      position="fixed"
+      top={0}
+      left={0}
+      right={0}
+      bottom={0}
+    >
       {/* Верхняя панель */}
-      <Box p={4} borderBottom="1px solid" borderColor="gray.700">
-        <Container maxW="container.lg">
+      <Box borderBottom="1px solid" borderColor="gray.700">
+        <Container maxW="container.lg" py={3}>
           <HStack spacing={4} justify="space-between">
             <HStack spacing={2}>
               <Text fontSize="lg" color="blue.400">◈</Text>
@@ -71,8 +94,8 @@ export default function Home() {
       </Box>
 
       {/* Фильтры */}
-      <Box p={4} borderBottom="1px solid" borderColor="gray.700">
-        <Container maxW="container.lg">
+      <Box borderBottom="1px solid" borderColor="gray.700">
+        <Container maxW="container.lg" py={3}>
           <HStack spacing={4} justify="space-between">
             <HStack spacing={4}>
               <Box position="relative" w="150px">
@@ -135,8 +158,8 @@ export default function Home() {
       </Box>
 
       {/* Корзина с прогрессом */}
-      <Box px={4} py={2}>
-        <Container maxW="container.lg">
+      <Box borderBottom="1px solid" borderColor="gray.700">
+        <Container maxW="container.lg" py={2}>
           <HStack>
             <Icon as={FaShoppingCart} color="blue.400" />
             <Progress
@@ -153,22 +176,20 @@ export default function Home() {
       </Box>
 
       {/* Основной контент */}
-      <Container maxW="container.lg" py={8} pb="100px">
-        <SimpleGrid columns={{ base: 2, md: 2 }} spacing={6}>
-          {/* Здесь будут карточки NFT */}
-        </SimpleGrid>
-      </Container>
+      <Box flex="1" overflow="auto">
+        <Container maxW="container.lg" py={4}>
+          <SimpleGrid columns={{ base: 2, md: 2 }} spacing={4}>
+            {/* Здесь будут карточки NFT */}
+          </SimpleGrid>
+        </Container>
+      </Box>
 
       {/* Нижняя навигация */}
       <Box 
-        position="fixed" 
-        bottom={0} 
-        w="100%" 
-        bg="gray.900" 
         borderTop="1px solid" 
         borderColor="gray.700"
         py={3}
-        px={4}
+        bg="gray.900"
       >
         <Container maxW="container.lg">
           <HStack justify="space-between">
