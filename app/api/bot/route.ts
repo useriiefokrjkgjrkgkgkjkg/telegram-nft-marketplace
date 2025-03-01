@@ -14,9 +14,22 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     
-    // Проверяем, что это команда /start
-    if (data.message?.text === '/start') {
-      const chatId = data.message.chat.id;
+    // Логируем входящие данные
+    console.log('Received webhook data:', JSON.stringify(data, null, 2));
+    
+    // Проверяем наличие сообщения и текста
+    if (!data.message) {
+      console.log('No message in webhook data');
+      return NextResponse.json({ ok: true });
+    }
+
+    const { text, chat } = data.message;
+    console.log('Message text:', text);
+    
+    // Проверяем команду /start
+    if (text && (text.trim() === '/start' || text.trim().toLowerCase() === 'старт')) {
+      console.log('Processing /start command');
+      const chatId = chat.id;
       
       // Создаем кнопку для открытия веб-приложения
       const keyboard = {
@@ -33,11 +46,13 @@ export async function POST(request: Request) {
       };
 
       // Отправляем приветственное сообщение с кнопкой
+      console.log('Sending welcome message to chat:', chatId);
       await bot.sendMessage(
         chatId,
         'Добро пожаловать в NFT Gifts Marketplace! 🎉\n\nЗдесь вы можете:\n✨ Просматривать NFT подарки\n💝 Улучшать подарки\n🎯 Передавать подарки другим\n\nНажмите на кнопку ниже, чтобы открыть маркетплейс:',
         keyboard
       );
+      console.log('Welcome message sent successfully');
     }
 
     return NextResponse.json({ ok: true });
