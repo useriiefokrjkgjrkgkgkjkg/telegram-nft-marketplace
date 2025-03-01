@@ -47,6 +47,7 @@ const SmallTonLogo = () => (
 export default function Home() {
   const [balance] = useState('0.087');
   const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('auctions');
   const toast = useToast();
   
   // Загружаем сохраненный адрес кошелька при запуске
@@ -104,15 +105,15 @@ export default function Home() {
     }
   };
 
-  // Элегантная черно-белая цветовая схема
+  // Обновляем цветовую схему
   const colors = {
-    bg: '#FFFFFF',
-    panel: '#FAFAFA',
-    accent: '#0098EA', // Цвет TON
-    text: '#1A1B1E',
-    border: '#EAEAEA',
-    muted: '#757575',
-    hover: '#F5F5F5'
+    bg: '#1A1B1E',
+    panel: '#25272A',
+    accent: '#0098EA',
+    text: '#FFFFFF',
+    border: '#2C2D30',
+    muted: '#808080',
+    hover: '#2C2D30'
   };
 
   // Устанавливаем высоту для мини-приложения Telegram
@@ -224,7 +225,7 @@ export default function Home() {
                 </Text>
                 <Select
                   variant="filled"
-                  bg="white"
+                  bg={colors.bg}
                   border="1px solid"
                   borderColor={colors.border}
                   h="45px"
@@ -244,7 +245,7 @@ export default function Home() {
                 </Text>
                 <Select
                   variant="filled"
-                  bg="white"
+                  bg={colors.bg}
                   border="1px solid"
                   borderColor={colors.border}
                   h="45px"
@@ -260,17 +261,6 @@ export default function Home() {
               </Box>
             </HStack>
             <HStack spacing={2}>
-              <IconButton
-                aria-label="Random"
-                icon={<Icon as={FaRandom} />}
-                variant="ghost"
-                color={colors.muted}
-                _hover={{ 
-                  color: colors.accent,
-                  bg: colors.hover
-                }}
-                transition="all 0.2s"
-              />
               <IconButton
                 aria-label="Delete"
                 icon={<Icon as={FaTrash} />}
@@ -342,21 +332,18 @@ export default function Home() {
         position="relative"
       >
         <Container maxW="container.lg" py={4}>
-          <SimpleGrid columns={{ base: 2, md: 2 }} spacing={4}>
-            {/* Пустое состояние */}
-            <Box 
-              position="absolute" 
-              top="50%" 
-              left="50%" 
-              transform="translate(-50%, -50%)"
-              textAlign="center"
-              color={colors.muted}
-            >
-              <Text fontSize="lg">
-                Пока никто не выставил NFT на продажу
-              </Text>
-            </Box>
-          </SimpleGrid>
+          <Box 
+            position="absolute" 
+            top="50%" 
+            left="50%" 
+            transform="translate(-50%, -50%)"
+            textAlign="center"
+            color={colors.muted}
+          >
+            <Text fontSize="lg">
+              No gifts found with the filters you selected
+            </Text>
+          </Box>
         </Container>
       </Box>
 
@@ -371,9 +358,12 @@ export default function Home() {
           <HStack justify="space-between">
             <VStack 
               spacing={1} 
-              color={colors.accent}
+              color={activeTab === 'market' ? colors.accent : colors.muted}
               cursor="pointer"
-              _hover={{ opacity: 0.8 }}
+              onClick={() => setActiveTab('market')}
+              _hover={{ 
+                color: colors.accent
+              }}
               transition="all 0.2s"
             >
               <Icon as={FaShoppingCart} boxSize={5} />
@@ -381,8 +371,9 @@ export default function Home() {
             </VStack>
             <VStack 
               spacing={1} 
-              color={colors.muted}
+              color={activeTab === 'auctions' ? colors.accent : colors.muted}
               cursor="pointer"
+              onClick={() => setActiveTab('auctions')}
               _hover={{ 
                 color: colors.accent
               }}
@@ -393,8 +384,9 @@ export default function Home() {
             </VStack>
             <VStack 
               spacing={1} 
-              color={colors.muted}
+              color={activeTab === 'gifts' ? colors.accent : colors.muted}
               cursor="pointer"
+              onClick={() => setActiveTab('gifts')}
               _hover={{ 
                 color: colors.accent
               }}
@@ -405,8 +397,9 @@ export default function Home() {
             </VStack>
             <VStack 
               spacing={1} 
-              color={colors.muted}
+              color={activeTab === 'gallery' ? colors.accent : colors.muted}
               cursor="pointer"
+              onClick={() => setActiveTab('gallery')}
               _hover={{ 
                 color: colors.accent
               }}
@@ -417,8 +410,9 @@ export default function Home() {
             </VStack>
             <VStack 
               spacing={1} 
-              color={colors.muted}
+              color={activeTab === 'activity' ? colors.accent : colors.muted}
               cursor="pointer"
+              onClick={() => setActiveTab('activity')}
               _hover={{ 
                 color: colors.accent
               }}
