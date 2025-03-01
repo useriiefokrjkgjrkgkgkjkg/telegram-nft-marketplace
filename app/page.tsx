@@ -50,7 +50,7 @@ const SmallTonLogo = () => (
 export default function Home() {
   const [balance] = useState('0.087');
   const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState('auctions');
+  const [activeTab, setActiveTab] = useState('market');
   const toast = useToast();
   
   // Загружаем сохраненный адрес кошелька при запуске
