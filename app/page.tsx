@@ -28,14 +28,37 @@ const pulseAnimation = keyframes`
 `;
 
 const glowAnimation = keyframes`
-  0% { box-shadow: 0 0 5px #63B3ED; }
-  50% { box-shadow: 0 0 20px #63B3ED; }
-  100% { box-shadow: 0 0 5px #63B3ED; }
+  0% { box-shadow: 0 0 5px #9F7AEA; }
+  50% { box-shadow: 0 0 20px #9F7AEA; }
+  100% { box-shadow: 0 0 5px #9F7AEA; }
+`;
+
+const floatAnimation = keyframes`
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+`;
+
+const fadeInAnimation = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const rotateAnimation = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
+const shimmerAnimation = keyframes`
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
 `;
 
 export default function Home() {
   const [balance] = useState('0.087');
   const bgColor = useColorModeValue('gray.900', 'gray.900');
+  const gradientBg = 'linear-gradient(to bottom, #1a1c2a, #0d1117)';
+  const panelBg = 'linear-gradient(to bottom, #1E1E2D, #1a1c2a)';
 
   // Устанавливаем высоту для мини-приложения Telegram
   useEffect(() => {
@@ -50,7 +73,7 @@ export default function Home() {
 
   return (
     <Box 
-      bg={bgColor} 
+      bg={gradientBg}
       height="100vh"
       maxHeight="100vh"
       overflow="hidden"
@@ -61,9 +84,26 @@ export default function Home() {
       left={0}
       right={0}
       bottom={0}
+      sx={{
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent, purple.400, transparent)',
+          animation: `${shimmerAnimation} 3s infinite linear`
+        }
+      }}
     >
       {/* Верхняя панель */}
-      <Box borderBottom="1px solid" borderColor="gray.700" bg="gray.800">
+      <Box 
+        borderBottom="1px solid" 
+        borderColor="whiteAlpha.100" 
+        bgImage={panelBg}
+        animation={`${fadeInAnimation} 0.5s ease-out`}
+      >
         <Container maxW="container.lg" py={2}>
           <HStack spacing={4} justify="space-between">
             <HStack spacing={2} 
@@ -71,20 +111,28 @@ export default function Home() {
               _hover={{ transform: 'scale(1.05)' }}
               transition="all 0.2s"
             >
-              <Text fontSize="lg" color="blue.400">▼</Text>
-              <Text fontSize="lg" color="blue.400">{balance}</Text>
-              <ChevronDownIcon boxSize={5} color="blue.400" />
+              <Text 
+                fontSize="lg" 
+                color="purple.400"
+                animation={`${floatAnimation} 2s ease-in-out infinite`}
+              >▼</Text>
+              <Text fontSize="lg" color="purple.400">{balance}</Text>
+              <ChevronDownIcon 
+                boxSize={5} 
+                color="purple.400"
+                animation={`${pulseAnimation} 2s infinite`}
+              />
             </HStack>
             <HStack spacing={2}>
               <IconButton
                 aria-label="Add balance"
                 icon={<AddIcon />}
                 size="sm"
-                bg="blue.500"
+                bg="purple.500"
                 color="white"
                 borderRadius="full"
                 _hover={{ 
-                  bg: 'blue.400',
+                  bg: 'purple.400',
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
@@ -93,21 +141,21 @@ export default function Home() {
                 aria-label="Subtract balance"
                 icon={<MinusIcon />}
                 size="sm"
-                bg="blue.500"
+                bg="purple.500"
                 color="white"
                 borderRadius="full"
                 _hover={{ 
-                  bg: 'blue.400',
+                  bg: 'purple.400',
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
               />
               <Button
-                bg="blue.500"
+                bg="purple.500"
                 color="white"
                 size="sm"
                 _hover={{ 
-                  bg: 'blue.400',
+                  bg: 'purple.400',
                   transform: 'scale(1.02)',
                 }}
                 transition="all 0.2s"
@@ -124,7 +172,14 @@ export default function Home() {
       </Box>
 
       {/* Фильтры */}
-      <Box borderBottom="1px solid" borderColor="gray.700" bg="gray.800">
+      <Box 
+        borderBottom="1px solid" 
+        borderColor="whiteAlpha.100" 
+        bgImage={panelBg}
+        animation={`${fadeInAnimation} 0.5s ease-out 0.2s`}
+        opacity="0"
+        sx={{ animationFillMode: 'forwards' }}
+      >
         <Container maxW="container.lg" py={3}>
           <HStack spacing={4} justify="space-between">
             <HStack spacing={4}>
@@ -134,15 +189,15 @@ export default function Home() {
                 </Text>
                 <Select
                   variant="filled"
-                  bg="gray.700"
+                  bg="whiteAlpha.50"
                   border="1px solid"
-                  borderColor="gray.600"
+                  borderColor="whiteAlpha.100"
                   h="45px"
                   pt="3"
                   color="white"
                   icon={<ChevronDownIcon />}
                   defaultValue="all"
-                  _hover={{ bg: 'gray.600' }}
+                  _hover={{ bg: 'whiteAlpha.100' }}
                   transition="all 0.2s"
                 >
                   <option value="all">All</option>
@@ -154,15 +209,15 @@ export default function Home() {
                 </Text>
                 <Select
                   variant="filled"
-                  bg="gray.700"
+                  bg="whiteAlpha.50"
                   border="1px solid"
-                  borderColor="gray.600"
+                  borderColor="whiteAlpha.100"
                   h="45px"
                   pt="3"
                   color="white"
                   icon={<ChevronDownIcon />}
                   defaultValue="all"
-                  _hover={{ bg: 'gray.600' }}
+                  _hover={{ bg: 'whiteAlpha.100' }}
                   transition="all 0.2s"
                 >
                   <option value="all">All</option>
@@ -176,7 +231,7 @@ export default function Home() {
                 variant="ghost"
                 color="gray.400"
                 _hover={{ 
-                  color: 'white',
+                  color: 'purple.400',
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
@@ -187,7 +242,7 @@ export default function Home() {
                 variant="ghost"
                 color="gray.400"
                 _hover={{ 
-                  color: 'white',
+                  color: 'purple.400',
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
@@ -198,7 +253,7 @@ export default function Home() {
                 variant="ghost"
                 color="gray.400"
                 _hover={{ 
-                  color: 'white',
+                  color: 'purple.400',
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
@@ -209,36 +264,61 @@ export default function Home() {
       </Box>
 
       {/* Корзина с прогрессом */}
-      <Box borderBottom="1px solid" borderColor="gray.700" bg="gray.800">
+      <Box 
+        borderBottom="1px solid" 
+        borderColor="whiteAlpha.100" 
+        bgImage={panelBg}
+        animation={`${fadeInAnimation} 0.5s ease-out 0.4s`}
+        opacity="0"
+        sx={{ animationFillMode: 'forwards' }}
+      >
         <Container maxW="container.lg" py={2}>
           <HStack>
             <Icon 
               as={FaShoppingCart} 
-              color="blue.400" 
-              _hover={{ transform: 'scale(1.1)' }}
-              transition="all 0.2s"
+              color="purple.400" 
+              _hover={{ 
+                transform: 'scale(1.1) rotate(10deg)',
+                color: 'purple.300'
+              }}
+              transition="all 0.3s"
               cursor="pointer"
             />
             <Progress
               value={0}
               size="sm"
-              colorScheme="blue"
+              colorScheme="purple"
               flex="1"
               borderRadius="full"
-              bg="gray.700"
+              bg="whiteAlpha.100"
               sx={{
                 '& > div': {
                   transition: 'all 0.3s',
+                  background: 'linear-gradient(90deg, purple.500, purple.300)',
+                  backgroundSize: '200% 100%',
+                  animation: `${shimmerAnimation} 2s infinite linear`
                 }
               }}
             />
-            <Text color="gray.400" fontWeight="bold">0</Text>
+            <Text 
+              color="gray.400" 
+              fontWeight="bold"
+              animation={`${pulseAnimation} 2s infinite`}
+            >0</Text>
           </HStack>
         </Container>
       </Box>
 
       {/* Основной контент */}
-      <Box flex="1" overflow="auto" bg="gray.900" position="relative">
+      <Box 
+        flex="1" 
+        overflow="auto" 
+        bgImage={gradientBg} 
+        position="relative"
+        animation={`${fadeInAnimation} 0.5s ease-out 0.6s`}
+        opacity="0"
+        sx={{ animationFillMode: 'forwards' }}
+      >
         <Container maxW="container.lg" py={4}>
           <SimpleGrid columns={{ base: 2, md: 2 }} spacing={4}>
             {/* Пустое состояние */}
@@ -249,6 +329,7 @@ export default function Home() {
               transform="translate(-50%, -50%)"
               textAlign="center"
               color="gray.500"
+              animation={`${floatAnimation} 3s ease-in-out infinite`}
             >
               <Text fontSize="lg">Пока никто не выставил NFT на продажу</Text>
             </Box>
@@ -259,20 +340,30 @@ export default function Home() {
       {/* Нижняя навигация */}
       <Box 
         borderTop="1px solid" 
-        borderColor="gray.700"
+        borderColor="whiteAlpha.100"
         py={3}
-        bg="gray.800"
+        bgImage={panelBg}
+        animation={`${fadeInAnimation} 0.5s ease-out 0.8s`}
+        opacity="0"
+        sx={{ animationFillMode: 'forwards' }}
       >
         <Container maxW="container.lg">
           <HStack justify="space-between">
             <VStack 
               spacing={1} 
-              color="blue.400"
+              color="purple.400"
               cursor="pointer"
-              _hover={{ transform: 'translateY(-2px)' }}
-              transition="all 0.2s"
+              _hover={{ 
+                transform: 'translateY(-2px) rotate(5deg)',
+                color: 'purple.300'
+              }}
+              transition="all 0.3s"
             >
-              <Icon as={FaShoppingCart} boxSize={5} />
+              <Icon 
+                as={FaShoppingCart} 
+                boxSize={5}
+                animation={`${rotateAnimation} 10s linear infinite`}
+              />
               <Text fontSize="xs">Market</Text>
             </VStack>
             <VStack 
@@ -280,12 +371,16 @@ export default function Home() {
               color="gray.500"
               cursor="pointer"
               _hover={{ 
-                color: 'gray.300',
-                transform: 'translateY(-2px)'
+                color: 'purple.400',
+                transform: 'translateY(-2px) rotate(-5deg)'
               }}
-              transition="all 0.2s"
+              transition="all 0.3s"
             >
-              <Icon as={FaGavel} boxSize={5} />
+              <Icon 
+                as={FaGavel} 
+                boxSize={5}
+                animation={`${rotateAnimation} 12s linear infinite`}
+              />
               <Text fontSize="xs">Auctions</Text>
             </VStack>
             <VStack 
@@ -293,12 +388,16 @@ export default function Home() {
               color="gray.500"
               cursor="pointer"
               _hover={{ 
-                color: 'gray.300',
-                transform: 'translateY(-2px)'
+                color: 'purple.400',
+                transform: 'translateY(-2px) rotate(5deg)'
               }}
-              transition="all 0.2s"
+              transition="all 0.3s"
             >
-              <Icon as={FaGift} boxSize={5} />
+              <Icon 
+                as={FaGift} 
+                boxSize={5}
+                animation={`${rotateAnimation} 14s linear infinite`}
+              />
               <Text fontSize="xs">My Gifts</Text>
             </VStack>
             <VStack 
@@ -306,12 +405,16 @@ export default function Home() {
               color="gray.500"
               cursor="pointer"
               _hover={{ 
-                color: 'gray.300',
-                transform: 'translateY(-2px)'
+                color: 'purple.400',
+                transform: 'translateY(-2px) rotate(-5deg)'
               }}
-              transition="all 0.2s"
+              transition="all 0.3s"
             >
-              <Icon as={FaImages} boxSize={5} />
+              <Icon 
+                as={FaImages} 
+                boxSize={5}
+                animation={`${rotateAnimation} 16s linear infinite`}
+              />
               <Text fontSize="xs">Gallery</Text>
             </VStack>
             <VStack 
@@ -319,12 +422,16 @@ export default function Home() {
               color="gray.500"
               cursor="pointer"
               _hover={{ 
-                color: 'gray.300',
-                transform: 'translateY(-2px)'
+                color: 'purple.400',
+                transform: 'translateY(-2px) rotate(5deg)'
               }}
-              transition="all 0.2s"
+              transition="all 0.3s"
             >
-              <Icon as={FaChartLine} boxSize={5} />
+              <Icon 
+                as={FaChartLine} 
+                boxSize={5}
+                animation={`${rotateAnimation} 18s linear infinite`}
+              />
               <Text fontSize="xs">Activity</Text>
             </VStack>
           </HStack>
