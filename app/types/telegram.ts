@@ -1,4 +1,7 @@
-export interface TelegramMessage {
+import { Message } from 'node-telegram-bot-api';
+
+// Расширяем тип Message из библиотеки
+export interface TelegramMessage extends Message {
   message_id: number;
   from: {
     id: number;
@@ -14,5 +17,5 @@ export interface TelegramMessage {
     type: string;
   };
   date: number;
-  text: string;
+  text?: string;
 } 

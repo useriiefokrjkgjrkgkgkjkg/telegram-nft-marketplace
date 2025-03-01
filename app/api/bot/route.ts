@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import TelegramBot from 'node-telegram-bot-api';
-import { TelegramMessage } from '@/app/types/telegram';
+import TelegramBot, { Message } from 'node-telegram-bot-api';
 
 // URL вашего приложения будет автоматически определен Vercel
 const APP_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
@@ -15,7 +14,7 @@ bot.setMyCommands([
 ]);
 
 // Обработка команды /start
-bot.onText(/\/start/, async (msg: TelegramMessage) => {
+bot.onText(/\/start/, async (msg: Message) => {
   const chatId = msg.chat.id;
   
   // Создаем кнопку для открытия веб-приложения
