@@ -129,13 +129,274 @@ export default function Home() {
   }, []);
 
   const renderContent = () => {
+    const renderMarketContent = () => (
+      <>
+        {/* Кнопки Internal Purchase и Performance */}
+        <Box bg={colors.panel} pt={2} pb={4}>
+          <Container maxW="container.lg">
+            <HStack spacing={4}>
+              <Button
+                variant="ghost"
+                color={colors.text}
+                bg={colors.buttonBg}
+                flex="1"
+                _hover={{ bg: colors.hover }}
+                rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
+              >
+                Internal Purchase
+              </Button>
+              <Button
+                variant="ghost"
+                color={colors.text}
+                bg={colors.buttonBg}
+                flex="1"
+                _hover={{ bg: colors.hover }}
+                rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
+              >
+                Performance
+              </Button>
+            </HStack>
+          </Container>
+        </Box>
+
+        {/* Табы Listed/Unlisted Gifts */}
+        <Box bg={colors.panel}>
+          <Container maxW="container.lg" py={2}>
+            <HStack spacing={0} bg={colors.buttonBg} borderRadius="lg" p={1}>
+              <Button
+                flex="1"
+                variant="ghost"
+                bg={activeGiftsTab === 'listed' ? colors.accent : 'transparent'}
+                color={activeGiftsTab === 'listed' ? 'white' : colors.muted}
+                onClick={() => setActiveGiftsTab('listed')}
+                _hover={{ bg: activeGiftsTab === 'listed' ? colors.accent : colors.hover }}
+                borderRadius="md"
+              >
+                Listed Gifts
+              </Button>
+              <Button
+                flex="1"
+                variant="ghost"
+                bg={activeGiftsTab === 'unlisted' ? colors.accent : 'transparent'}
+                color={activeGiftsTab === 'unlisted' ? 'white' : colors.muted}
+                onClick={() => setActiveGiftsTab('unlisted')}
+                _hover={{ bg: activeGiftsTab === 'unlisted' ? colors.accent : colors.hover }}
+                borderRadius="md"
+              >
+                Unlisted Gifts
+              </Button>
+            </HStack>
+          </Container>
+        </Box>
+
+        {/* Фильтры */}
+        <Box bg={colors.panel}>
+          <Container maxW="container.lg" py={3}>
+            <HStack spacing={4} justify="space-between">
+              <HStack spacing={4}>
+                <Box position="relative" w="150px">
+                  <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
+                    NFTs
+                  </Text>
+                  <Select
+                    variant="filled"
+                    bg={colors.buttonBg}
+                    color={colors.text}
+                    h="45px"
+                    pt="3"
+                    icon={<ChevronDownIcon />}
+                    defaultValue="all"
+                    _hover={{ bg: colors.hover }}
+                    borderRadius="md"
+                  >
+                    <option value="all">All</option>
+                  </Select>
+                </Box>
+                <Box position="relative" w="150px">
+                  <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
+                    Model
+                  </Text>
+                  <Select
+                    variant="filled"
+                    bg={colors.buttonBg}
+                    color={colors.text}
+                    h="45px"
+                    pt="3"
+                    icon={<ChevronDownIcon />}
+                    defaultValue="all"
+                    _hover={{ bg: colors.hover }}
+                    borderRadius="md"
+                  >
+                    <option value="all">All</option>
+                  </Select>
+                </Box>
+              </HStack>
+              <HStack spacing={2}>
+                <IconButton
+                  aria-label="Delete"
+                  icon={<Icon as={FaTrash} />}
+                  variant="ghost"
+                  color={colors.muted}
+                  bg={colors.buttonBg}
+                  _hover={{ 
+                    color: colors.accent,
+                    bg: colors.hover
+                  }}
+                  transition="all 0.2s"
+                />
+                <IconButton
+                  aria-label="More"
+                  icon={<ChevronDownIcon />}
+                  variant="ghost"
+                  color={colors.muted}
+                  bg={colors.buttonBg}
+                  _hover={{ 
+                    color: colors.accent,
+                    bg: colors.hover
+                  }}
+                  transition="all 0.2s"
+                />
+              </HStack>
+            </HStack>
+          </Container>
+        </Box>
+        <Market />
+      </>
+    );
+
+    const renderAuctionsContent = () => (
+      <>
+        {/* Фильтры для аукционов */}
+        <Box bg={colors.panel}>
+          <Container maxW="container.lg" py={3}>
+            <HStack spacing={4} justify="space-between">
+              <HStack spacing={4}>
+                <Box position="relative" w="150px">
+                  <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
+                    Price
+                  </Text>
+                  <Select
+                    variant="filled"
+                    bg={colors.buttonBg}
+                    color={colors.text}
+                    h="45px"
+                    pt="3"
+                    icon={<ChevronDownIcon />}
+                    defaultValue="all"
+                    _hover={{ bg: colors.hover }}
+                    borderRadius="md"
+                  >
+                    <option value="all">All Prices</option>
+                  </Select>
+                </Box>
+                <Box position="relative" w="150px">
+                  <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
+                    Time
+                  </Text>
+                  <Select
+                    variant="filled"
+                    bg={colors.buttonBg}
+                    color={colors.text}
+                    h="45px"
+                    pt="3"
+                    icon={<ChevronDownIcon />}
+                    defaultValue="all"
+                    _hover={{ bg: colors.hover }}
+                    borderRadius="md"
+                  >
+                    <option value="all">All Time</option>
+                  </Select>
+                </Box>
+              </HStack>
+              <IconButton
+                aria-label="More"
+                icon={<ChevronDownIcon />}
+                variant="ghost"
+                color={colors.muted}
+                bg={colors.buttonBg}
+                _hover={{ 
+                  color: colors.accent,
+                  bg: colors.hover
+                }}
+                transition="all 0.2s"
+              />
+            </HStack>
+          </Container>
+        </Box>
+        <Auctions />
+      </>
+    );
+
+    const renderGiftsContent = () => (
+      <>
+        {/* Фильтры для подарков */}
+        <Box bg={colors.panel}>
+          <Container maxW="container.lg" py={3}>
+            <HStack spacing={4} justify="space-between">
+              <HStack spacing={4}>
+                <Box position="relative" w="150px">
+                  <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
+                    Status
+                  </Text>
+                  <Select
+                    variant="filled"
+                    bg={colors.buttonBg}
+                    color={colors.text}
+                    h="45px"
+                    pt="3"
+                    icon={<ChevronDownIcon />}
+                    defaultValue="all"
+                    _hover={{ bg: colors.hover }}
+                    borderRadius="md"
+                  >
+                    <option value="all">All Status</option>
+                  </Select>
+                </Box>
+                <Box position="relative" w="150px">
+                  <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
+                    Sort by
+                  </Text>
+                  <Select
+                    variant="filled"
+                    bg={colors.buttonBg}
+                    color={colors.text}
+                    h="45px"
+                    pt="3"
+                    icon={<ChevronDownIcon />}
+                    defaultValue="newest"
+                    _hover={{ bg: colors.hover }}
+                    borderRadius="md"
+                  >
+                    <option value="newest">Newest First</option>
+                  </Select>
+                </Box>
+              </HStack>
+              <IconButton
+                aria-label="More"
+                icon={<ChevronDownIcon />}
+                variant="ghost"
+                color={colors.muted}
+                bg={colors.buttonBg}
+                _hover={{ 
+                  color: colors.accent,
+                  bg: colors.hover
+                }}
+                transition="all 0.2s"
+              />
+            </HStack>
+          </Container>
+        </Box>
+        <MyGifts />
+      </>
+    );
+
     switch (activeTab) {
       case 'market':
-        return <Market />;
+        return renderMarketContent();
       case 'auctions':
-        return <Auctions />;
+        return renderAuctionsContent();
       case 'gifts':
-        return <MyGifts />;
+        return renderGiftsContent();
       case 'gallery':
         return (
           <Container maxW="container.lg" py={4}>
@@ -171,7 +432,7 @@ export default function Home() {
           </Container>
         );
       default:
-        return <Auctions />;
+        return renderMarketContent();
     }
   };
 
@@ -256,139 +517,7 @@ export default function Home() {
         </Container>
       </Box>
 
-      {/* Кнопки Internal Purchase и Performance */}
-      <Box bg={colors.panel} pt={2} pb={4}>
-        <Container maxW="container.lg">
-          <HStack spacing={4}>
-            <Button
-              variant="ghost"
-              color={colors.text}
-              bg={colors.buttonBg}
-              flex="1"
-              _hover={{ bg: colors.hover }}
-              rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
-            >
-              Internal Purchase
-            </Button>
-            <Button
-              variant="ghost"
-              color={colors.text}
-              bg={colors.buttonBg}
-              flex="1"
-              _hover={{ bg: colors.hover }}
-              rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
-            >
-              Performance
-            </Button>
-          </HStack>
-        </Container>
-      </Box>
-
-      {/* Табы Listed/Unlisted Gifts */}
-      <Box bg={colors.panel}>
-        <Container maxW="container.lg" py={2}>
-          <HStack spacing={0} bg={colors.buttonBg} borderRadius="lg" p={1}>
-            <Button
-              flex="1"
-              variant="ghost"
-              bg={activeGiftsTab === 'listed' ? colors.accent : 'transparent'}
-              color={activeGiftsTab === 'listed' ? 'white' : colors.muted}
-              onClick={() => setActiveGiftsTab('listed')}
-              _hover={{ bg: activeGiftsTab === 'listed' ? colors.accent : colors.hover }}
-              borderRadius="md"
-            >
-              Listed Gifts
-            </Button>
-            <Button
-              flex="1"
-              variant="ghost"
-              bg={activeGiftsTab === 'unlisted' ? colors.accent : 'transparent'}
-              color={activeGiftsTab === 'unlisted' ? 'white' : colors.muted}
-              onClick={() => setActiveGiftsTab('unlisted')}
-              _hover={{ bg: activeGiftsTab === 'unlisted' ? colors.accent : colors.hover }}
-              borderRadius="md"
-            >
-              Unlisted Gifts
-            </Button>
-          </HStack>
-        </Container>
-      </Box>
-
-      {/* Фильтры */}
-      <Box 
-        bg={colors.panel}
-      >
-        <Container maxW="container.lg" py={3}>
-          <HStack spacing={4} justify="space-between">
-            <HStack spacing={4}>
-              <Box position="relative" w="150px">
-                <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
-                  NFTs
-                </Text>
-                <Select
-                  variant="filled"
-                  bg={colors.buttonBg}
-                  color={colors.text}
-                  h="45px"
-                  pt="3"
-                  icon={<ChevronDownIcon />}
-                  defaultValue="all"
-                  _hover={{ bg: colors.hover }}
-                  borderRadius="md"
-                >
-                  <option value="all">All</option>
-                </Select>
-              </Box>
-              <Box position="relative" w="150px">
-                <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
-                  Model
-                </Text>
-                <Select
-                  variant="filled"
-                  bg={colors.buttonBg}
-                  color={colors.text}
-                  h="45px"
-                  pt="3"
-                  icon={<ChevronDownIcon />}
-                  defaultValue="all"
-                  _hover={{ bg: colors.hover }}
-                  borderRadius="md"
-                >
-                  <option value="all">All</option>
-                </Select>
-              </Box>
-            </HStack>
-            <HStack spacing={2}>
-              <IconButton
-                aria-label="Delete"
-                icon={<Icon as={FaTrash} />}
-                variant="ghost"
-                color={colors.muted}
-                bg={colors.buttonBg}
-                _hover={{ 
-                  color: colors.accent,
-                  bg: colors.hover
-                }}
-                transition="all 0.2s"
-              />
-              <IconButton
-                aria-label="More"
-                icon={<ChevronDownIcon />}
-                variant="ghost"
-                color={colors.muted}
-                bg={colors.buttonBg}
-                _hover={{ 
-                  color: colors.accent,
-                  bg: colors.hover
-                }}
-                transition="all 0.2s"
-              />
-            </HStack>
-          </HStack>
-        </Container>
-      </Box>
-
-      {/* Основной контент */}
+      {/* Основной контент с фильтрами */}
       <Box 
         flex="1" 
         overflow="auto" 
