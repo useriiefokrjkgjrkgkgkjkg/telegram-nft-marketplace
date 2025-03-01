@@ -17,7 +17,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import { FaShoppingCart, FaGavel, FaGift, FaImages, FaChartLine, FaRandom, FaTrash } from 'react-icons/fa';
+import { FaShoppingCart, FaGavel, FaGift, FaImages, FaChartLine, FaRandom, FaTrash, FaInfoCircle } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { keyframes } from '@emotion/react';
 import { Market } from './components/Market';
@@ -47,6 +47,7 @@ export default function Home() {
   const [balance] = useState('0.087');
   const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('market');
+  const [activeGiftsTab, setActiveGiftsTab] = useState('listed');
   const toast = useToast();
   
   // Загружаем сохраненный адрес кошелька при запуске
@@ -106,13 +107,14 @@ export default function Home() {
 
   // Обновляем цветовую схему
   const colors = {
-    bg: '#1A1B1E',
-    panel: '#25272A',
+    bg: '#0E1621',
+    panel: '#17212B',
     accent: '#0098EA',
     text: '#FFFFFF',
-    border: '#2C2D30',
-    muted: '#808080',
-    hover: '#2C2D30'
+    border: '#253340',
+    muted: '#6D7883',
+    hover: '#253340',
+    buttonBg: '#242F3D'
   };
 
   // Устанавливаем высоту для мини-приложения Telegram
@@ -189,8 +191,6 @@ export default function Home() {
     >
       {/* Верхняя панель */}
       <Box 
-        borderBottom="1px solid"
-        borderColor={colors.border}
         bg={colors.panel}
       >
         <Container maxW="container.lg" py={2}>
@@ -218,7 +218,7 @@ export default function Home() {
                 size="sm"
                 bg={colors.accent}
                 color="white"
-                borderRadius="md"
+                borderRadius="full"
                 _hover={{ 
                   opacity: 0.9
                 }}
@@ -230,7 +230,7 @@ export default function Home() {
                 size="sm"
                 bg={colors.accent}
                 color="white"
-                borderRadius="md"
+                borderRadius="full"
                 _hover={{ 
                   opacity: 0.9
                 }}
@@ -239,14 +239,14 @@ export default function Home() {
               <Button
                 bg={colors.accent}
                 color="white"
-                size="sm"
+                size="md"
                 onClick={connectWallet}
                 _hover={{ 
                   opacity: 0.9
                 }}
                 transition="all 0.2s"
-                borderRadius="md"
-                px={4}
+                borderRadius="full"
+                px={6}
                 leftIcon={<SmallTonLogo />}
               >
                 {connectedWallet ? 'Кошелек подключен' : 'Connect Wallet'}
@@ -256,10 +256,66 @@ export default function Home() {
         </Container>
       </Box>
 
+      {/* Кнопки Internal Purchase и Performance */}
+      <Box bg={colors.panel} pt={2} pb={4}>
+        <Container maxW="container.lg">
+          <HStack spacing={4}>
+            <Button
+              variant="ghost"
+              color={colors.text}
+              bg={colors.buttonBg}
+              flex="1"
+              _hover={{ bg: colors.hover }}
+              rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
+            >
+              Internal Purchase
+            </Button>
+            <Button
+              variant="ghost"
+              color={colors.text}
+              bg={colors.buttonBg}
+              flex="1"
+              _hover={{ bg: colors.hover }}
+              rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
+            >
+              Performance
+            </Button>
+          </HStack>
+        </Container>
+      </Box>
+
+      {/* Табы Listed/Unlisted Gifts */}
+      <Box bg={colors.panel}>
+        <Container maxW="container.lg" py={2}>
+          <HStack spacing={0} bg={colors.buttonBg} borderRadius="lg" p={1}>
+            <Button
+              flex="1"
+              variant="ghost"
+              bg={activeGiftsTab === 'listed' ? colors.accent : 'transparent'}
+              color={activeGiftsTab === 'listed' ? 'white' : colors.muted}
+              onClick={() => setActiveGiftsTab('listed')}
+              _hover={{ bg: activeGiftsTab === 'listed' ? colors.accent : colors.hover }}
+              borderRadius="md"
+            >
+              Listed Gifts
+            </Button>
+            <Button
+              flex="1"
+              variant="ghost"
+              bg={activeGiftsTab === 'unlisted' ? colors.accent : 'transparent'}
+              color={activeGiftsTab === 'unlisted' ? 'white' : colors.muted}
+              onClick={() => setActiveGiftsTab('unlisted')}
+              _hover={{ bg: activeGiftsTab === 'unlisted' ? colors.accent : colors.hover }}
+              borderRadius="md"
+            >
+              Unlisted Gifts
+            </Button>
+          </HStack>
+        </Container>
+      </Box>
+
       {/* Фильтры */}
       <Box 
-        borderBottom="1px solid"
-        borderColor={colors.border}
         bg={colors.panel}
       >
         <Container maxW="container.lg" py={3}>
@@ -271,16 +327,14 @@ export default function Home() {
                 </Text>
                 <Select
                   variant="filled"
-                  bg={colors.bg}
-                  border="1px solid"
-                  borderColor={colors.border}
+                  bg={colors.buttonBg}
+                  color={colors.text}
                   h="45px"
                   pt="3"
-                  color={colors.text}
                   icon={<ChevronDownIcon />}
                   defaultValue="all"
-                  _hover={{ borderColor: colors.accent }}
-                  transition="all 0.2s"
+                  _hover={{ bg: colors.hover }}
+                  borderRadius="md"
                 >
                   <option value="all">All</option>
                 </Select>
@@ -291,16 +345,14 @@ export default function Home() {
                 </Text>
                 <Select
                   variant="filled"
-                  bg={colors.bg}
-                  border="1px solid"
-                  borderColor={colors.border}
+                  bg={colors.buttonBg}
+                  color={colors.text}
                   h="45px"
                   pt="3"
-                  color={colors.text}
                   icon={<ChevronDownIcon />}
                   defaultValue="all"
-                  _hover={{ borderColor: colors.accent }}
-                  transition="all 0.2s"
+                  _hover={{ bg: colors.hover }}
+                  borderRadius="md"
                 >
                   <option value="all">All</option>
                 </Select>
@@ -312,6 +364,7 @@ export default function Home() {
                 icon={<Icon as={FaTrash} />}
                 variant="ghost"
                 color={colors.muted}
+                bg={colors.buttonBg}
                 _hover={{ 
                   color: colors.accent,
                   bg: colors.hover
@@ -323,6 +376,7 @@ export default function Home() {
                 icon={<ChevronDownIcon />}
                 variant="ghost"
                 color={colors.muted}
+                bg={colors.buttonBg}
                 _hover={{ 
                   color: colors.accent,
                   bg: colors.hover
@@ -330,42 +384,6 @@ export default function Home() {
                 transition="all 0.2s"
               />
             </HStack>
-          </HStack>
-        </Container>
-      </Box>
-
-      {/* Корзина с прогрессом */}
-      <Box 
-        borderBottom="1px solid"
-        borderColor={colors.border}
-        bg={colors.panel}
-      >
-        <Container maxW="container.lg" py={2}>
-          <HStack>
-            <Icon 
-              as={FaShoppingCart} 
-              color={colors.accent}
-              _hover={{ opacity: 0.8 }}
-              transition="all 0.2s"
-              cursor="pointer"
-            />
-            <Progress
-              value={0}
-              size="sm"
-              flex="1"
-              borderRadius="full"
-              bg={colors.border}
-              sx={{
-                '& > div': {
-                  background: colors.accent,
-                  transition: 'all 0.3s'
-                }
-              }}
-            />
-            <Text 
-              color={colors.text}
-              fontWeight="500"
-            >0</Text>
           </HStack>
         </Container>
       </Box>
@@ -378,6 +396,19 @@ export default function Home() {
         position="relative"
       >
         {renderContent()}
+        
+        {/* Текст внизу основного контента */}
+        <Box
+          position="absolute"
+          bottom={20}
+          left="50%"
+          transform="translateX(-50%)"
+          textAlign="center"
+          color={colors.muted}
+        >
+          <Text>Want to sell your Gift?</Text>
+          <Text>Transfer it to <Text as="span" color={colors.accent}>@GiftRelayer</Text></Text>
+        </Box>
       </Box>
 
       {/* Нижняя навигация */}
