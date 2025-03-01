@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import TelegramBot, { Message } from 'node-telegram-bot-api';
+import TelegramBot from 'node-telegram-bot-api';
 
 // URL вашего приложения будет автоматически определен Vercel
 const APP_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
 
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN!, {
-  polling: true
+  polling: false // Отключаем polling, так как будем использовать вебхуки
 });
 
 // Настраиваем кнопку меню для бота
@@ -46,28 +46,31 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     
+    // Проверяем, что это команда /start
     if (data.message?.text === '/start') {
       const chatId = data.message.chat.id;
+      
+      // Создаем кнопку для открытия веб-приложения
       const keyboard = {
-        keyboard: [
-          [
-            {
-              text: '🎁 Открыть NFT Маркет',
-              web_app: { url: APP_URL }
-            }
-          ]
-        ],
-        resize_keyboard: true,
-        one_time_keyboard: false
+        reply_markup: {
+          keyboard: [
+            [
+              {
+                text: '🎁 Открыть NFT Маркет',
+                web_app: { url: APP_URL }
+              }
+            ]
+          ],
+          resize_keyboard: true,
+          one_time_keyboard: false
+        }
       };
 
+      // Отправляем приветственное сообщение с кнопкой
       await bot.sendMessage(
         chatId,
         'Добро пожаловать в NFT Gifts Marketplace! 🎉\n\nЗдесь вы можете:\n✨ Просматривать NFT подарки\n💝 Улучшать подарки\n🎯 Передавать подарки другим\n\nНажмите на кнопку ниже, чтобы открыть маркетплейс:',
-        {
-          reply_markup: keyboard,
-          parse_mode: 'HTML'
-        }
+        keyboard
       );
     }
 
@@ -81,7 +84,7 @@ export async function POST(request: Request) {
   }
 }
 
-// Простой GET-эндпоинт для проверки работоспособности
+// Эндпоинт для проверки работоспособности
 export async function GET() {
   return NextResponse.json({ status: 'Bot is running' });
 } 
