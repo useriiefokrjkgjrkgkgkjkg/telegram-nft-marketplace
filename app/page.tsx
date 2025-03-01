@@ -20,6 +20,9 @@ import { AddIcon, MinusIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { FaShoppingCart, FaGavel, FaGift, FaImages, FaChartLine, FaRandom, FaTrash } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { keyframes } from '@emotion/react';
+import { Market } from './components/Market';
+import { Auctions } from './components/Auctions';
+import { MyGifts } from './components/MyGifts';
 
 const fadeInAnimation = keyframes`
   from { opacity: 0; }
@@ -126,6 +129,53 @@ export default function Home() {
       window.Telegram.WebApp.enableClosingConfirmation();
     }
   }, []);
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'market':
+        return <Market />;
+      case 'auctions':
+        return <Auctions />;
+      case 'gifts':
+        return <MyGifts />;
+      case 'gallery':
+        return (
+          <Container maxW="container.lg" py={4}>
+            <Box 
+              position="absolute" 
+              top="50%" 
+              left="50%" 
+              transform="translate(-50%, -50%)"
+              textAlign="center"
+              color={colors.muted}
+            >
+              <Text fontSize="lg">
+                Галерея пока пуста
+              </Text>
+            </Box>
+          </Container>
+        );
+      case 'activity':
+        return (
+          <Container maxW="container.lg" py={4}>
+            <Box 
+              position="absolute" 
+              top="50%" 
+              left="50%" 
+              transform="translate(-50%, -50%)"
+              textAlign="center"
+              color={colors.muted}
+            >
+              <Text fontSize="lg">
+                Нет активности
+              </Text>
+            </Box>
+          </Container>
+        );
+      default:
+        return <Auctions />;
+    }
+  };
 
   return (
     <Box 
@@ -331,20 +381,7 @@ export default function Home() {
         bg={colors.bg}
         position="relative"
       >
-        <Container maxW="container.lg" py={4}>
-          <Box 
-            position="absolute" 
-            top="50%" 
-            left="50%" 
-            transform="translate(-50%, -50%)"
-            textAlign="center"
-            color={colors.muted}
-          >
-            <Text fontSize="lg">
-              No gifts found with the filters you selected
-            </Text>
-          </Box>
-        </Container>
+        {renderContent()}
       </Box>
 
       {/* Нижняя навигация */}
