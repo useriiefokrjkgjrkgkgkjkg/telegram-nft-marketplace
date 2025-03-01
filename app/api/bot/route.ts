@@ -38,7 +38,7 @@ export async function POST(request: Request) {
             [
               {
                 text: '🎁 Открыть NFT Маркет',
-                url: APP_URL
+                web_app: { url: APP_URL }
               }
             ]
           ]
