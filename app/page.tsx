@@ -14,6 +14,7 @@ import {
   VStack,
   Icon,
   Progress,
+  useToast,
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { FaShoppingCart, FaGavel, FaGift, FaImages, FaChartLine, FaRandom, FaTrash } from 'react-icons/fa';
@@ -26,26 +27,83 @@ const fadeInAnimation = keyframes`
 `;
 
 const TonLogo = () => (
-  <svg width="24" height="24" viewBox="0 0 50 50" fill="none">
-    <path d="M25 50C38.8071 50 50 38.8071 50 25C50 11.1929 38.8071 0 25 0C11.1929 0 0 11.1929 0 25C0 38.8071 11.1929 50 25 50Z" fill="#0098EA"/>
-    <path d="M17.6612 14.3137L24.9996 10.2539L32.338 14.3137L24.9996 18.3735L17.6612 14.3137Z" fill="white"/>
-    <path d="M17.6612 21.9706V29.0294L24.9996 33.0892V18.3735L17.6612 21.9706Z" fill="white"/>
-    <path d="M32.338 21.9706V29.0294L24.9996 33.0892V18.3735L32.338 21.9706Z" fill="white"/>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4.50772 0.00551844L19.4922 0C19.6792 0.00551844 19.8551 0.0716739 19.9864 0.192305L23.8161 3.79116C23.9474 3.91179 24.0121 4.07654 23.9979 4.2413L23.9923 19.2154C23.9866 19.4022 23.9034 19.5725 23.7664 19.6983L19.7155 23.2586C19.5842 23.3792 19.4083 23.4454 19.2213 23.4399L4.23685 23.4454C4.04986 23.4399 3.87396 23.3737 3.74267 23.2531L0.0734819 19.6542C-0.0578139 19.5336 -0.122456 19.3688 -0.108343 19.2041L-0.102811 4.23578C-0.0972788 4.04896 -0.0140897 3.87869 0.122902 3.75254L4.01368 0.192305C4.14497 0.0716739 4.32087 0.00551844 4.50772 0.00551844Z" fill="#0098EA"/>
+    <path d="M7.07861 6.86501L12 4.92188L16.9214 6.86501L12 8.80814L7.07861 6.86501Z" fill="white"/>
+    <path d="M7.07861 10.5254V14.2341L12 16.1772V8.80814L7.07861 10.5254Z" fill="white"/>
+    <path d="M16.9214 10.5254V14.2341L12 16.1772V8.80814L16.9214 10.5254Z" fill="white"/>
   </svg>
 );
 
 const SmallTonLogo = () => (
-  <svg width="16" height="16" viewBox="0 0 50 50" fill="none">
-    <path d="M25 50C38.8071 50 50 38.8071 50 25C50 11.1929 38.8071 0 25 0C11.1929 0 0 11.1929 0 25C0 38.8071 11.1929 50 25 50Z" fill="#0098EA"/>
-    <path d="M17.6612 14.3137L24.9996 10.2539L32.338 14.3137L24.9996 18.3735L17.6612 14.3137Z" fill="white"/>
-    <path d="M17.6612 21.9706V29.0294L24.9996 33.0892V18.3735L17.6612 21.9706Z" fill="white"/>
-    <path d="M32.338 21.9706V29.0294L24.9996 33.0892V18.3735L32.338 21.9706Z" fill="white"/>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4.50772 0.00551844L19.4922 0C19.6792 0.00551844 19.8551 0.0716739 19.9864 0.192305L23.8161 3.79116C23.9474 3.91179 24.0121 4.07654 23.9979 4.2413L23.9923 19.2154C23.9866 19.4022 23.9034 19.5725 23.7664 19.6983L19.7155 23.2586C19.5842 23.3792 19.4083 23.4454 19.2213 23.4399L4.23685 23.4454C4.04986 23.4399 3.87396 23.3737 3.74267 23.2531L0.0734819 19.6542C-0.0578139 19.5336 -0.122456 19.3688 -0.108343 19.2041L-0.102811 4.23578C-0.0972788 4.04896 -0.0140897 3.87869 0.122902 3.75254L4.01368 0.192305C4.14497 0.0716739 4.32087 0.00551844 4.50772 0.00551844Z" fill="white"/>
+    <path d="M7.07861 6.86501L12 4.92188L16.9214 6.86501L12 8.80814L7.07861 6.86501Z" fill="#0098EA"/>
+    <path d="M7.07861 10.5254V14.2341L12 16.1772V8.80814L7.07861 10.5254Z" fill="#0098EA"/>
+    <path d="M16.9214 10.5254V14.2341L12 16.1772V8.80814L16.9214 10.5254Z" fill="#0098EA"/>
   </svg>
 );
 
 export default function Home() {
   const [balance] = useState('0.087');
+  const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
+  const toast = useToast();
   
+  // Загружаем сохраненный адрес кошелька при запуске
+  useEffect(() => {
+    const savedWallet = localStorage.getItem('connectedWallet');
+    if (savedWallet) {
+      setConnectedWallet(savedWallet);
+    }
+  }, []);
+
+  // Функция подключения кошелька
+  const connectWallet = async () => {
+    try {
+      // @ts-ignore
+      if (window.Telegram?.WebApp?.showScanQrPopup) {
+        // @ts-ignore
+        window.Telegram.WebApp.showScanQrPopup({
+          text: "Отсканируйте QR-код вашего TON кошелька",
+        });
+        
+        // @ts-ignore
+        window.Telegram.WebApp.onEvent('qrTextReceived', (qrText) => {
+          // Сохраняем адрес кошелька
+          localStorage.setItem('connectedWallet', qrText);
+          setConnectedWallet(qrText);
+          
+          toast({
+            title: "Кошелек подключен",
+            description: "Ваш TON кошелек успешно подключен",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+          
+          // @ts-ignore
+          window.Telegram.WebApp.closeScanQrPopup();
+        });
+      } else {
+        toast({
+          title: "Ошибка",
+          description: "Функция сканирования QR недоступна",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка подключения",
+        description: "Не удалось подключить кошелек",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
   // Элегантная черно-белая цветовая схема
   const colors = {
     bg: '#FFFFFF',
@@ -135,6 +193,7 @@ export default function Home() {
                 bg={colors.accent}
                 color="white"
                 size="sm"
+                onClick={connectWallet}
                 _hover={{ 
                   opacity: 0.9
                 }}
@@ -143,7 +202,7 @@ export default function Home() {
                 px={4}
                 leftIcon={<SmallTonLogo />}
               >
-                Connect Wallet
+                {connectedWallet ? 'Кошелек подключен' : 'Connect Wallet'}
               </Button>
             </HStack>
           </HStack>
