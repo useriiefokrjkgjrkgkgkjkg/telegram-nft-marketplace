@@ -1,47 +1,111 @@
-import { Box, Text, Container, Table, Thead, Tbody, Tr, Th, HStack, Icon } from '@chakra-ui/react';
+import { Box, Text, Container, VStack, HStack, Icon, Image } from '@chakra-ui/react';
 import { FaChevronRight } from 'react-icons/fa';
+
+interface ActivityItem {
+  id: string;
+  gift: {
+    name: string;
+    image: string;
+    number: string;
+  };
+  price: number;
+  type: 'Sale' | 'Bid';
+  date: string;
+}
 
 export const Activity = () => {
   const colors = {
-    bg: '#0E1621',
-    panel: '#17212B',
+    bg: '#17212B',
+    panel: '#242F3D',
     accent: '#0098EA',
     text: '#FFFFFF',
     border: '#253340',
     muted: '#6D7883',
     hover: '#253340',
-    buttonBg: '#242F3D'
   };
+
+  const activities: ActivityItem[] = [
+    {
+      id: '1',
+      gift: {
+        name: 'Diamond Ring',
+        image: '/nft/diamond-ring.jpg',
+        number: '#9783'
+      },
+      price: 6.49,
+      type: 'Sale',
+      date: '28 Feb 18:18:15 GMT'
+    },
+    {
+      id: '2',
+      gift: {
+        name: 'Toy Bear',
+        image: '/nft/toy-bear.jpg',
+        number: '#25512'
+      },
+      price: 6,
+      type: 'Sale',
+      date: '28 Feb 18:18:15 GMT'
+    },
+    {
+      id: '3',
+      gift: {
+        name: 'Astral Shard',
+        image: '/nft/astral-shard.jpg',
+        number: '#786'
+      },
+      price: 8,
+      type: 'Bid',
+      date: '28 Feb 18:18:15 GMT'
+    }
+  ];
 
   return (
     <Container maxW="container.lg" py={4}>
-      {/* Заголовок таблицы */}
-      <HStack 
-        spacing={4} 
-        bg={colors.buttonBg} 
-        p={4} 
-        borderRadius="md"
-        mb={4}
-      >
-        <Text flex="1" color={colors.muted}>Gift</Text>
-        <Text width="100px" color={colors.muted}>Price</Text>
-        <Text width="100px" color={colors.muted}>Type</Text>
-        <Icon as={FaChevronRight} color={colors.muted} />
-      </HStack>
-
-      {/* Пустое состояние */}
-      <Box 
-        position="absolute" 
-        top="50%" 
-        left="50%" 
-        transform="translate(-50%, -50%)"
-        textAlign="center"
-        color={colors.muted}
-      >
-        <Text fontSize="lg">
-          No activity found
-        </Text>
-      </Box>
+      <VStack spacing={2} align="stretch">
+        {activities.map((activity) => (
+          <Box
+            key={activity.id}
+            bg={colors.panel}
+            p={4}
+            borderRadius="lg"
+            _hover={{ bg: colors.hover }}
+            cursor="pointer"
+          >
+            <HStack spacing={4} justify="space-between">
+              <HStack spacing={4} flex={1}>
+                <Image
+                  src={activity.gift.image}
+                  alt={activity.gift.name}
+                  boxSize="40px"
+                  borderRadius="md"
+                  objectFit="cover"
+                />
+                <VStack align="start" spacing={0}>
+                  <Text color={colors.text} fontSize="sm">{activity.gift.name}</Text>
+                  <Text color={colors.muted} fontSize="xs">{activity.gift.number}</Text>
+                </VStack>
+              </HStack>
+              
+              <HStack spacing={4} flex={1} justify="space-between">
+                <Text color={colors.text} fontSize="sm">
+                  ₸ {activity.price}
+                </Text>
+                <Text 
+                  color={activity.type === 'Sale' ? colors.accent : '#FF9500'} 
+                  fontSize="sm"
+                >
+                  {activity.type}
+                </Text>
+                <Text color={colors.muted} fontSize="xs">
+                  {activity.date}
+                </Text>
+                <Icon as={FaChevronRight} color={colors.muted} />
+              </HStack>
+            </HStack>
+          </Box>
+        ))}
+      </VStack>
     </Container>
   );
 }; 

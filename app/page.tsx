@@ -509,69 +509,94 @@ export default function Home() {
       bottom={0}
     >
       {/* Верхняя панель */}
-      <Box 
-        bg={colors.panel}
-      >
+      <Box bg={colors.panel}>
         <Container maxW="container.lg" py={2}>
-          <HStack spacing={4} justify="space-between">
-            <HStack spacing={2} 
-              cursor="pointer" 
-              _hover={{ opacity: 0.8 }}
-              transition="all 0.2s"
-            >
-              <TonLogo />
-              <Text 
-                fontSize="lg" 
-                color={colors.text}
-                fontWeight="500"
-              >{balance}</Text>
-              <ChevronDownIcon 
-                boxSize={5} 
-                color={colors.text}
-              />
-            </HStack>
-            <HStack spacing={2}>
-              <IconButton
-                aria-label="Add balance"
-                icon={<AddIcon />}
-                size="sm"
-                bg={colors.accent}
-                color="white"
-                borderRadius="full"
-                _hover={{ 
-                  opacity: 0.9
-                }}
+          <VStack spacing={2}>
+            <HStack spacing={4} justify="space-between" width="100%">
+              <HStack spacing={2} 
+                cursor="pointer" 
+                _hover={{ opacity: 0.8 }}
                 transition="all 0.2s"
-              />
-              <IconButton
-                aria-label="Subtract balance"
-                icon={<MinusIcon />}
-                size="sm"
-                bg={colors.accent}
-                color="white"
-                borderRadius="full"
-                _hover={{ 
-                  opacity: 0.9
-                }}
-                transition="all 0.2s"
-              />
-              <Button
-                bg={colors.accent}
-                color="white"
-                size="md"
-                onClick={connectWallet}
-                _hover={{ 
-                  opacity: 0.9
-                }}
-                transition="all 0.2s"
-                borderRadius="full"
-                px={6}
-                leftIcon={<SmallTonLogo />}
               >
-                {connectedWallet ? 'Кошелек подключен' : 'Connect Wallet'}
-              </Button>
+                <TonLogo />
+                <Text 
+                  fontSize="lg" 
+                  color={colors.text}
+                  fontWeight="500"
+                >{balance}</Text>
+                <ChevronDownIcon 
+                  boxSize={5} 
+                  color={colors.text}
+                />
+              </HStack>
+              <HStack spacing={2}>
+                <IconButton
+                  aria-label="Add balance"
+                  icon={<AddIcon />}
+                  size="sm"
+                  bg={colors.accent}
+                  color="white"
+                  borderRadius="full"
+                  _hover={{ 
+                    opacity: 0.9
+                  }}
+                  transition="all 0.2s"
+                />
+                <IconButton
+                  aria-label="Subtract balance"
+                  icon={<MinusIcon />}
+                  size="sm"
+                  bg={colors.accent}
+                  color="white"
+                  borderRadius="full"
+                  _hover={{ 
+                    opacity: 0.9
+                  }}
+                  transition="all 0.2s"
+                />
+                <Button
+                  bg={colors.accent}
+                  color="white"
+                  size="md"
+                  onClick={connectWallet}
+                  _hover={{ 
+                    opacity: 0.9
+                  }}
+                  transition="all 0.2s"
+                  borderRadius="full"
+                  px={6}
+                  leftIcon={<SmallTonLogo />}
+                >
+                  {connectedWallet ? 'Кошелек подключен' : 'Connect Wallet'}
+                </Button>
+              </HStack>
             </HStack>
-          </HStack>
+
+            {activeTab === 'gifts' && (
+              <HStack spacing={4} width="100%">
+                <Button
+                  variant="ghost"
+                  color={colors.text}
+                  bg={colors.buttonBg}
+                  flex="1"
+                  _hover={{ bg: colors.hover }}
+                  rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
+                >
+                  Internal Purchase
+                </Button>
+                <Button
+                  variant="ghost"
+                  color={colors.text}
+                  bg={colors.buttonBg}
+                  flex="1"
+                  _hover={{ bg: colors.hover }}
+                  rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
+                >
+                  Performance
+                </Button>
+              </HStack>
+            )}
+          </VStack>
         </Container>
       </Box>
 

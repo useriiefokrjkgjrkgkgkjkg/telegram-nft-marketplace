@@ -1,57 +1,22 @@
-import { Box, Text, Container, HStack, Button, Icon, Tabs, TabList, Tab } from '@chakra-ui/react';
+import { Box, Text, Container, HStack, Button, Icon, VStack } from '@chakra-ui/react';
 import { FaInfoCircle } from 'react-icons/fa';
+import { useState } from 'react';
 
 export const MyGifts = () => {
+  const [activeTab, setActiveTab] = useState('listed');
+
   const colors = {
-    bg: '#0E1621',
-    panel: '#17212B',
+    bg: '#17212B',
+    panel: '#242F3D',
     accent: '#0098EA',
     text: '#FFFFFF',
     border: '#253340',
     muted: '#6D7883',
     hover: '#253340',
-    buttonBg: '#242F3D'
   };
 
   return (
     <Container maxW="container.lg" py={4}>
-      {/* Табы */}
-      <Tabs variant="soft-rounded" mb={4}>
-        <TabList>
-          <Tab 
-            _selected={{ color: 'white', bg: colors.accent }}
-            color={colors.muted}
-            bg={colors.buttonBg}
-            mr={2}
-          >
-            Gifts
-          </Tab>
-          <Tab 
-            _selected={{ color: 'white', bg: colors.accent }}
-            color={colors.muted}
-            bg={colors.buttonBg}
-            mr={2}
-          >
-            Activity
-          </Tab>
-          <Tab 
-            _selected={{ color: 'white', bg: colors.accent }}
-            color={colors.muted}
-            bg={colors.buttonBg}
-            mr={2}
-          >
-            Orders
-          </Tab>
-          <Tab 
-            _selected={{ color: 'white', bg: colors.accent }}
-            color={colors.muted}
-            bg={colors.buttonBg}
-          >
-            Deals
-          </Tab>
-        </TabList>
-      </Tabs>
-
       {/* Пустое состояние */}
       <Box 
         position="absolute" 
@@ -61,9 +26,14 @@ export const MyGifts = () => {
         textAlign="center"
         color={colors.muted}
       >
-        <Text fontSize="lg">
-          No gifts found with the filters you selected
-        </Text>
+        <VStack spacing={2}>
+          <Text fontSize="lg">
+            Want to sell your Gift?
+          </Text>
+          <Text fontSize="md">
+            Transfer it to <Text as="span" color={colors.accent}>@GiftRelayer</Text>
+          </Text>
+        </VStack>
       </Box>
     </Container>
   );

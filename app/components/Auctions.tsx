@@ -1,31 +1,117 @@
-import { Box, Text, Container } from '@chakra-ui/react';
+import { Box, Text, Container, SimpleGrid, HStack, Button, VStack, Image } from '@chakra-ui/react';
+
+interface AuctionCard {
+  id: string;
+  name: string;
+  image: string;
+  number: string;
+  highestBid: number;
+  timeLeft: {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+}
 
 export const Auctions = () => {
   const colors = {
-    bg: '#0E1621',
-    panel: '#17212B',
+    bg: '#17212B',
+    panel: '#242F3D',
     accent: '#0098EA',
     text: '#FFFFFF',
     border: '#253340',
     muted: '#6D7883',
     hover: '#253340',
-    buttonBg: '#242F3D'
   };
+
+  const auctions: AuctionCard[] = [
+    {
+      id: '1',
+      name: 'Record Player',
+      image: '/nft/record-player.jpg',
+      number: '#4511',
+      highestBid: 4.5,
+      timeLeft: { days: 0, hours: 0, minutes: 0, seconds: 0 }
+    },
+    {
+      id: '2',
+      name: 'Scared Cat',
+      image: '/nft/scared-cat.jpg',
+      number: '#15501',
+      highestBid: 8,
+      timeLeft: { days: 0, hours: 0, minutes: 0, seconds: 0 }
+    },
+    {
+      id: '3',
+      name: 'Skull Flower',
+      image: '/nft/skull-flower.jpg',
+      number: '#9375',
+      highestBid: 3.2,
+      timeLeft: { days: 0, hours: 0, minutes: 0, seconds: 0 }
+    },
+    {
+      id: '4',
+      name: 'Desk Calendar',
+      image: '/nft/desk-calendar.jpg',
+      number: '#12921',
+      highestBid: 2.8,
+      timeLeft: { days: 0, hours: 0, minutes: 0, seconds: 0 }
+    }
+  ];
 
   return (
     <Container maxW="container.lg" py={4}>
-      <Box 
-        position="absolute" 
-        top="50%" 
-        left="50%" 
-        transform="translate(-50%, -50%)"
-        textAlign="center"
-        color={colors.muted}
-      >
-        <Text fontSize="lg">
-          No gifts found with the filters you selected
-        </Text>
-      </Box>
+      <SimpleGrid columns={2} spacing={4}>
+        {auctions.map((auction) => (
+          <Box
+            key={auction.id}
+            bg={colors.panel}
+            borderRadius="xl"
+            overflow="hidden"
+          >
+            <Image
+              src={auction.image}
+              alt={auction.name}
+              w="100%"
+              h="150px"
+              objectFit="cover"
+            />
+            
+            <VStack align="stretch" p={4} spacing={2}>
+              <HStack justify="space-between">
+                <Text color={colors.text} fontSize="md">{auction.name}</Text>
+                <Text color={colors.muted} fontSize="sm">{auction.number}</Text>
+              </HStack>
+              
+              <HStack justify="space-between">
+                <Text color={colors.muted} fontSize="sm">Highest Bid</Text>
+                <Text color={colors.text} fontSize="sm">{auction.highestBid}</Text>
+              </HStack>
+              
+              <HStack justify="space-between" fontSize="xs" color={colors.muted}>
+                <Text>{auction.timeLeft.days}d</Text>
+                <Text>:</Text>
+                <Text>{auction.timeLeft.hours}h</Text>
+                <Text>:</Text>
+                <Text>{auction.timeLeft.minutes}m</Text>
+                <Text>:</Text>
+                <Text>{auction.timeLeft.seconds}s</Text>
+              </HStack>
+              
+              <Button
+                bg={colors.accent}
+                color="white"
+                size="sm"
+                width="100%"
+                _hover={{ opacity: 0.9 }}
+              >
+                Bid {auction.highestBid} ₸
+              </Button>
+            </VStack>
+          </Box>
+        ))}
+      </SimpleGrid>
     </Container>
   );
 }; 
