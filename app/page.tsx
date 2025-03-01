@@ -64,7 +64,7 @@ export default function Home() {
     >
       {/* Верхняя панель */}
       <Box borderBottom="1px solid" borderColor="gray.700" bg="gray.800">
-        <Container maxW="container.lg" py={3}>
+        <Container maxW="container.lg" py={2}>
           <HStack spacing={4} justify="space-between">
             <HStack spacing={2} 
               cursor="pointer" 
@@ -75,11 +75,11 @@ export default function Home() {
               <Text fontSize="lg" color="blue.400">{balance}</Text>
               <ChevronDownIcon boxSize={5} color="blue.400" />
             </HStack>
-            <HStack spacing={3}>
+            <HStack spacing={2}>
               <IconButton
                 aria-label="Add balance"
                 icon={<AddIcon />}
-                size="md"
+                size="sm"
                 bg="blue.500"
                 color="white"
                 borderRadius="full"
@@ -92,27 +92,12 @@ export default function Home() {
               <IconButton
                 aria-label="Subtract balance"
                 icon={<MinusIcon />}
-                size="md"
+                size="sm"
                 bg="blue.500"
                 color="white"
                 borderRadius="full"
                 _hover={{ 
                   bg: 'blue.400',
-                  transform: 'scale(1.1)',
-                }}
-                transition="all 0.2s"
-              />
-              <Box 
-                as="button"
-                bg="red.400"
-                w="12"
-                h="12"
-                borderRadius="full"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                _hover={{ 
-                  bg: 'red.300',
                   transform: 'scale(1.1)',
                 }}
                 transition="all 0.2s"
@@ -120,14 +105,15 @@ export default function Home() {
               <Button
                 bg="blue.500"
                 color="white"
+                size="sm"
                 _hover={{ 
                   bg: 'blue.400',
                   transform: 'scale(1.02)',
                 }}
                 transition="all 0.2s"
                 borderRadius="full"
-                px={6}
-                leftIcon={<Text as="span" fontSize="lg">▼</Text>}
+                px={4}
+                leftIcon={<Text as="span" fontSize="md">▼</Text>}
                 animation={`${glowAnimation} 2s infinite`}
               >
                 Connect Wallet
