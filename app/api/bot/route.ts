@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import TelegramBot from 'node-telegram-bot-api';
 
-// URL вашего приложения будет автоматически определен Vercel
-const APP_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+// Используем полный URL для веб-приложения
+const APP_URL = 'https://telegram-nft-marketplace-nine.vercel.app';
 
 // Инициализируем бота без polling
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN!, {
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
             [
               {
                 text: '🎁 Открыть NFT Маркет',
-                web_app: { url: APP_URL }
+                url: APP_URL
               }
             ]
           ]
