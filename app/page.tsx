@@ -77,56 +77,61 @@ export default function Home() {
       {/* Верхняя панель */}
       <Box 
         bg="#17212B" 
-        py={2} 
-        px={4}
+        py={4} 
+        px={6}
         borderBottom="1px solid"
         borderColor="#253340"
       >
-        <HStack spacing={4} justify="space-between">
-          <HStack spacing={2}>
-            <TonLogo />
-            <Text color="white" fontSize="sm">0</Text>
+        <HStack spacing={6} justify="space-between">
+          <HStack spacing={3}>
+            <TonLogo size="32px" />
+            <Text color="white" fontSize="lg" fontWeight="bold">0.087</Text>
           </HStack>
-          <HStack spacing={2}>
+          <HStack spacing={3}>
             <IconButton
               aria-label="Add"
-              icon={<AddIcon boxSize={3} />}
-              size="sm"
+              icon={<AddIcon boxSize={4} />}
+              size="lg"
               bg="#0098EA"
               color="white"
               borderRadius="full"
-              h="24px"
-              minW="24px"
-              _hover={{ opacity: 0.8 }}
+              h="40px"
+              minW="40px"
+              _hover={{ bg: "#0088D1" }}
               onClick={onDepositOpen}
               isDisabled={isWithdrawOpen}
             />
             <IconButton
               aria-label="Subtract"
-              icon={<MinusIcon boxSize={3} />}
-              size="sm"
+              icon={<MinusIcon boxSize={4} />}
+              size="lg"
               bg="#0098EA"
               color="white"
               borderRadius="full"
-              h="24px"
-              minW="24px"
-              _hover={{ opacity: 0.8 }}
+              h="40px"
+              minW="40px"
+              _hover={{ bg: "#0088D1" }}
               onClick={onWithdrawOpen}
               isDisabled={isDepositOpen}
             />
             <Button
               bg="#0098EA"
               color="white"
-              size="sm"
+              size="lg"
               borderRadius="full"
-              h="24px"
-              px={3}
-              fontSize="xs"
-              _hover={{ opacity: 0.8 }}
+              h="40px"
+              px={6}
+              fontSize="md"
+              fontWeight="bold"
+              _hover={{ bg: "#0088D1" }}
               leftIcon={
-                <TriangleUpIcon 
-                  boxSize="12px"
-                  color="white"
+                <Image 
+                  src={window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url || "https://via.placeholder.com/32"}
+                  alt="User"
+                  width="24px"
+                  height="24px"
+                  borderRadius="full"
+                  fallbackSrc="https://via.placeholder.com/32"
                 />
               }
             >
