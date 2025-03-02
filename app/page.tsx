@@ -17,7 +17,7 @@ import {
   VStack,
   useDisclosure,
 } from '@chakra-ui/react';
-import { AddIcon, MinusIcon } from '@chakra-ui/icons';
+import { AddIcon, MinusIcon, TriangleUpIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 
 // Объявляем типы для Telegram WebApp
@@ -124,12 +124,9 @@ export default function Home() {
               fontSize="xs"
               _hover={{ opacity: 0.8 }}
               leftIcon={
-                <Image 
-                  src={window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url || "https://via.placeholder.com/24"}
-                  alt="User"
-                  width="16px"
-                  height="16px"
-                  borderRadius="full"
+                <TriangleUpIcon 
+                  boxSize="12px"
+                  color="white"
                 />
               }
             >
