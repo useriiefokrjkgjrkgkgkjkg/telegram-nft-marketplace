@@ -39,12 +39,7 @@ declare global {
 
 // Компонент для логотипа TON
 const TonLogo = ({ size = "24px" }: { size?: string }) => (
-  <Image 
-    src="https://ton.org/download/ton_symbol.svg"
-    alt="TON" 
-    width={size} 
-    height={size}
-  />
+  <Text fontSize={size}>💎</Text>
 );
 
 export default function Home() {
