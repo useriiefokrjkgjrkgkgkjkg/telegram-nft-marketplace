@@ -39,9 +39,12 @@ declare global {
 
 // Компонент для логотипа TON
 const TonLogo = ({ size = "24px" }: { size?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2L3 8V16L12 22L21 16V8L12 2ZM12 4.236L18.618 8.764L12 13.291L5.382 8.764L12 4.236ZM5 10.618L11.5 15.073V19.927L5 15.472V10.618ZM12.5 19.927V15.073L19 10.618V15.472L12.5 19.927Z" fill="currentColor"/>
-  </svg>
+  <Image 
+    src="https://ton.org/assets/ton_symbol.svg"
+    alt="TON"
+    width={size}
+    height={size}
+  />
 );
 
 export default function Home() {
