@@ -17,9 +17,8 @@ import {
   VStack,
   useDisclosure,
 } from '@chakra-ui/react';
-import { AddIcon, MinusIcon, TriangleUpIcon, StarIcon } from '@chakra-ui/icons';
+import { AddIcon, MinusIcon, StarIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
-import { BsThreeDots } from 'react-icons/bs';
 
 // Объявляем типы для Telegram WebApp
 declare global {
@@ -28,8 +27,6 @@ declare global {
       WebApp: {
         expand: () => void;
         enableClosingConfirmation: () => void;
-        close: () => void;
-        ready: () => void;
         initDataUnsafe?: {
           user?: {
             photo_url?: string;
@@ -65,7 +62,6 @@ export default function Home() {
 
   useEffect(() => {
     if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.ready();
       window.Telegram.WebApp.expand();
       window.Telegram.WebApp.enableClosingConfirmation();
     }
@@ -83,42 +79,73 @@ export default function Home() {
       left={0}
       right={0}
       bottom={0}
+      overflow="hidden"
     >
       {/* Верхняя панель */}
       <Box 
         bg="#17212B" 
-        py={4} 
+        py={2} 
         px={4}
         borderBottom="1px solid"
         borderColor="#253340"
       >
-        <HStack justify="space-between" align="center">
-          <Button
-            variant="ghost"
-            color="#0098EA"
-            fontSize="16px"
-            fontWeight="400"
-            p={0}
-            _hover={{ bg: 'transparent', opacity: 0.8 }}
-            onClick={() => window.Telegram?.WebApp?.close()}
+        <HStack spacing={2} ml={-1}>
+          <Box
+            width="32px"
+            height="32px"
+            borderRadius="md"
+            border="1px solid"
+            borderColor="whiteAlpha.300"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            bg="whiteAlpha.50"
           >
-            Закрыть
-          </Button>
-          <HStack spacing={4}>
-            <Text color="white" fontSize="16px" fontWeight="500">
-              nft market
-            </Text>
-            <Text color="#6D7883" fontSize="14px">
-              мини-приложение
-            </Text>
-          </HStack>
+            <Text fontSize="xl" color="white">?</Text>
+          </Box>
+          <Text color="white" fontSize="xl" fontWeight="medium">0</Text>
           <IconButton
-            aria-label="Menu"
-            icon={<BsThreeDots />}
-            variant="ghost"
-            color="#0098EA"
-            _hover={{ bg: 'transparent', opacity: 0.8 }}
+            aria-label="Add"
+            icon={<AddIcon />}
+            bg="#0098EA"
+            color="white"
+            borderRadius="full"
+            size="md"
+            isDisabled={isWithdrawOpen}
+            onClick={() => {
+              if (!isDepositOpen && !isWithdrawOpen) {
+                onDepositOpen();
+              }
+            }}
+            _hover={{ bg: "#0088D1" }}
           />
+          <IconButton
+            aria-label="Subtract"
+            icon={<MinusIcon />}
+            bg="#0098EA"
+            color="white"
+            borderRadius="full"
+            size="md"
+            isDisabled={isDepositOpen}
+            onClick={() => {
+              if (!isDepositOpen && !isWithdrawOpen) {
+                onWithdrawOpen();
+              }
+            }}
+            _hover={{ bg: "#0088D1" }}
+          />
+          <Button
+            bg="#0098EA"
+            color="white"
+            borderRadius="full"
+            size="md"
+            px={4}
+            ml={-1}
+            leftIcon={<StarIcon />}
+            _hover={{ bg: "#0088D1" }}
+          >
+            Connect Wallet
+          </Button>
         </HStack>
       </Box>
 
