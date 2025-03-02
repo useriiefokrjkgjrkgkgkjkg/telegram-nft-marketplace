@@ -69,7 +69,7 @@ export default function Home() {
 
   return (
     <Box 
-      bg="#0A1929"
+      bg="#17212B"
       minHeight="100vh"
       display="flex"
       flexDirection="column"
