@@ -1,6 +1,6 @@
-import { Box, Text, Container, HStack, Icon, Select, IconButton } from '@chakra-ui/react';
+import { Box, Text, Container, HStack, Icon } from '@chakra-ui/react';
 import { keyframes } from '@emotion/react';
-import { FaShoppingCart, FaTrash, FaChevronDown } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(10px); }
@@ -27,122 +27,6 @@ export const Market = () => {
 
   return (
     <Container maxW="container.lg" py={2}>
-      {/* Фильтры */}
-      <Box 
-        bg={colors.panel} 
-        p={4} 
-        borderRadius="2xl" 
-        mb={4}
-        border="1px solid"
-        borderColor={colors.border}
-        animation={`${fadeIn} 0.3s ease-out`}
-      >
-        <HStack spacing={4} justify="space-between">
-          <HStack spacing={4}>
-            <Box position="relative" w="120px">
-              <Text 
-                position="absolute" 
-                top="-2.5" 
-                left="3" 
-                fontSize="xs" 
-                color={colors.muted}
-                fontWeight="500"
-              >
-                NFTs
-              </Text>
-              <Select
-                bg={colors.hover}
-                color={colors.text}
-                border="none"
-                h="36px"
-                pt="2"
-                fontSize="sm"
-                icon={<Icon as={FaChevronDown} color={colors.muted} />}
-                _hover={{ bg: colors.hover }}
-                _focus={{ 
-                  boxShadow: 'none',
-                  borderColor: colors.accent 
-                }}
-                css={{
-                  '& option': {
-                    bg: colors.panel,
-                  }
-                }}
-              >
-                <option value="all">All</option>
-                <option value="rare">Rare</option>
-                <option value="epic">Epic</option>
-              </Select>
-            </Box>
-            <Box position="relative" w="120px">
-              <Text 
-                position="absolute" 
-                top="-2.5" 
-                left="3" 
-                fontSize="xs" 
-                color={colors.muted}
-                fontWeight="500"
-              >
-                Model
-              </Text>
-              <Select
-                bg={colors.hover}
-                color={colors.text}
-                border="none"
-                h="36px"
-                pt="2"
-                fontSize="sm"
-                icon={<Icon as={FaChevronDown} color={colors.muted} />}
-                _hover={{ bg: colors.hover }}
-                _focus={{ 
-                  boxShadow: 'none',
-                  borderColor: colors.accent 
-                }}
-                css={{
-                  '& option': {
-                    bg: colors.panel,
-                  }
-                }}
-              >
-                <option value="all">All</option>
-                <option value="3d">3D</option>
-                <option value="2d">2D</option>
-              </Select>
-            </Box>
-          </HStack>
-          <HStack spacing={2}>
-            <IconButton
-              aria-label="Clear filters"
-              icon={<Icon as={FaTrash} boxSize={4} />}
-              variant="ghost"
-              color={colors.muted}
-              bg={colors.hover}
-              h="36px"
-              w="36px"
-              _hover={{ 
-                color: colors.accent,
-                transform: 'scale(1.05)'
-              }}
-              transition="all 0.2s ease"
-            />
-            <IconButton
-              aria-label="More options"
-              icon={<Icon as={FaChevronDown} boxSize={4} />}
-              variant="ghost"
-              color={colors.muted}
-              bg={colors.hover}
-              h="36px"
-              w="36px"
-              _hover={{ 
-                color: colors.accent,
-                transform: 'scale(1.05)'
-              }}
-              transition="all 0.2s ease"
-            />
-          </HStack>
-        </HStack>
-      </Box>
-
       {/* Корзина и счетчик */}
       <HStack 
         spacing={2} 
