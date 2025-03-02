@@ -77,63 +77,65 @@ export default function Home() {
       {/* Верхняя панель */}
       <Box 
         bg="#17212B" 
-        py={4} 
-        px={6}
-        borderBottom="1px solid"
-        borderColor="#253340"
+        py={2} 
+        px={4}
       >
-        <HStack spacing={6} justify="space-between">
-          <HStack spacing={3}>
-            <TonLogo size="32px" />
-            <Text color="white" fontSize="lg" fontWeight="bold">0.087</Text>
-          </HStack>
-          <HStack spacing={3}>
-            <IconButton
-              aria-label="Add"
-              icon={<AddIcon boxSize={4} />}
-              size="lg"
-              bg="#0098EA"
-              color="white"
-              borderRadius="full"
-              h="40px"
-              minW="40px"
-              _hover={{ bg: "#0088D1" }}
-              onClick={onDepositOpen}
-              isDisabled={isWithdrawOpen}
-            />
-            <IconButton
-              aria-label="Subtract"
-              icon={<MinusIcon boxSize={4} />}
-              size="lg"
-              bg="#0098EA"
-              color="white"
-              borderRadius="full"
-              h="40px"
-              minW="40px"
-              _hover={{ bg: "#0088D1" }}
-              onClick={onWithdrawOpen}
-              isDisabled={isDepositOpen}
-            />
-            <Button
-              bg="#0098EA"
-              color="white"
-              size="lg"
-              borderRadius="full"
-              h="40px"
-              px={6}
-              fontSize="md"
-              fontWeight="bold"
-              _hover={{ bg: "#0088D1" }}
-              leftIcon={
-                <StarIcon 
-                  boxSize="18px"
-                  color="white"
-                />
+        <HStack spacing={2}>
+          <Box
+            width="32px"
+            height="32px"
+            borderRadius="md"
+            border="1px solid"
+            borderColor="whiteAlpha.300"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            bg="whiteAlpha.50"
+          >
+            <Text fontSize="xl" color="white">?</Text>
+          </Box>
+          <Text color="white" fontSize="xl" fontWeight="medium">0</Text>
+          <IconButton
+            aria-label="Add"
+            icon={<AddIcon />}
+            bg="#0098EA"
+            color="white"
+            borderRadius="full"
+            size="md"
+            isDisabled={isWithdrawOpen}
+            onClick={() => {
+              if (!isDepositOpen && !isWithdrawOpen) {
+                onDepositOpen();
               }
-            >
-              Connect Wallet
-            </Button>
-          </HStack>
+            }}
+            _hover={{ bg: "#0088D1" }}
+          />
+          <IconButton
+            aria-label="Subtract"
+            icon={<MinusIcon />}
+            bg="#0098EA"
+            color="white"
+            borderRadius="full"
+            size="md"
+            isDisabled={isDepositOpen}
+            onClick={() => {
+              if (!isDepositOpen && !isWithdrawOpen) {
+                onWithdrawOpen();
+              }
+            }}
+            _hover={{ bg: "#0088D1" }}
+          />
+          <Button
+            bg="#0098EA"
+            color="white"
+            borderRadius="full"
+            size="md"
+            px={4}
+            leftIcon={<StarIcon />}
+            _hover={{ bg: "#0088D1" }}
+          >
+            Connect Wallet
+          </Button>
         </HStack>
       </Box>
 
