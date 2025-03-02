@@ -1,4 +1,4 @@
-import { Box, Text, Container, SimpleGrid, HStack, Button, VStack, Image } from '@chakra-ui/react';
+import { Box, Text, Container, SimpleGrid, HStack, Button, Image } from '@chakra-ui/react';
 
 interface AuctionCard {
   id: string;
@@ -61,8 +61,8 @@ export const Auctions = () => {
   ];
 
   return (
-    <Container maxW="container.lg" py={4}>
-      <SimpleGrid columns={2} spacing={4}>
+    <Container maxW="container.lg" py={2}>
+      <SimpleGrid columns={2} spacing={3}>
         {auctions.map((auction) => (
           <Box
             key={auction.id}
@@ -74,22 +74,28 @@ export const Auctions = () => {
               src={auction.image}
               alt={auction.name}
               w="100%"
-              h="150px"
+              h="160px"
               objectFit="cover"
             />
             
-            <VStack align="stretch" p={4} spacing={2}>
-              <HStack justify="space-between">
-                <Text color={colors.text} fontSize="md">{auction.name}</Text>
-                <Text color={colors.muted} fontSize="sm">{auction.number}</Text>
+            <Box p={3}>
+              <HStack justify="space-between" mb={2}>
+                <Text color={colors.text} fontSize="sm" fontWeight="medium">
+                  {auction.name}
+                </Text>
+                <Text color={colors.muted} fontSize="xs">
+                  {auction.number}
+                </Text>
               </HStack>
               
-              <HStack justify="space-between">
-                <Text color={colors.muted} fontSize="sm">Highest Bid</Text>
-                <Text color={colors.text} fontSize="sm">{auction.highestBid}</Text>
+              <HStack justify="space-between" mb={2}>
+                <Text color={colors.muted} fontSize="xs">Highest Bid</Text>
+                <Text color={colors.text} fontSize="sm">
+                  {auction.highestBid} ₸
+                </Text>
               </HStack>
               
-              <HStack justify="space-between" fontSize="xs" color={colors.muted}>
+              <HStack justify="center" spacing={1} mb={2} fontSize="xs" color={colors.muted}>
                 <Text>{auction.timeLeft.days}d</Text>
                 <Text>:</Text>
                 <Text>{auction.timeLeft.hours}h</Text>
@@ -104,11 +110,13 @@ export const Auctions = () => {
                 color="white"
                 size="sm"
                 width="100%"
-                _hover={{ opacity: 0.9 }}
+                height="32px"
+                fontSize="sm"
+                _hover={{ opacity: 0.8 }}
               >
                 Bid {auction.highestBid} ₸
               </Button>
-            </VStack>
+            </Box>
           </Box>
         ))}
       </SimpleGrid>

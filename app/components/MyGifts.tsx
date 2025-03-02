@@ -1,10 +1,6 @@
-import { Box, Text, Container, HStack, Button, Icon, VStack } from '@chakra-ui/react';
-import { FaInfoCircle } from 'react-icons/fa';
-import { useState } from 'react';
+import { Box, Text, Container, VStack } from '@chakra-ui/react';
 
 export const MyGifts = () => {
-  const [activeTab, setActiveTab] = useState('listed');
-
   const colors = {
     bg: '#17212B',
     panel: '#242F3D',
@@ -16,8 +12,7 @@ export const MyGifts = () => {
   };
 
   return (
-    <Container maxW="container.lg" py={4}>
-      {/* Пустое состояние */}
+    <Container maxW="container.lg" py={2}>
       <Box 
         position="absolute" 
         top="50%" 
@@ -26,11 +21,11 @@ export const MyGifts = () => {
         textAlign="center"
         color={colors.muted}
       >
-        <VStack spacing={2}>
-          <Text fontSize="lg">
+        <VStack spacing={1}>
+          <Text fontSize="md">
             Want to sell your Gift?
           </Text>
-          <Text fontSize="md">
+          <Text fontSize="sm">
             Transfer it to <Text as="span" color={colors.accent}>@GiftRelayer</Text>
           </Text>
         </VStack>

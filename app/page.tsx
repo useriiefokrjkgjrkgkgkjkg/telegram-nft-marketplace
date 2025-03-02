@@ -115,7 +115,9 @@ export default function Home() {
     border: '#253340',
     muted: '#6D7883',
     hover: '#253340',
-    buttonBg: '#242F3D'
+    buttonBg: '#242F3D',
+    orange: '#FF9500',
+    red: '#FF3B30'
   };
 
   // Устанавливаем высоту для мини-приложения Telegram
@@ -275,16 +277,18 @@ export default function Home() {
     const renderGiftsContent = () => (
       <>
         {/* Кнопки Internal Purchase и Performance */}
-        <Box bg={colors.panel} pt={2} pb={4}>
-          <Container maxW="container.lg">
+        <Box bg={colors.panel} borderBottom="1px solid" borderColor={colors.border}>
+          <Container maxW="container.lg" py={2}>
             <HStack spacing={4}>
               <Button
                 variant="ghost"
                 color={colors.text}
                 bg={colors.buttonBg}
                 flex="1"
+                h="36px"
+                fontSize="sm"
+                leftIcon={<Icon as={FaInfoCircle} color={colors.accent} boxSize={4} />}
                 _hover={{ bg: colors.hover }}
-                rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
               >
                 Internal Purchase
               </Button>
@@ -293,8 +297,10 @@ export default function Home() {
                 color={colors.text}
                 bg={colors.buttonBg}
                 flex="1"
+                h="36px"
+                fontSize="sm"
+                leftIcon={<Icon as={FaInfoCircle} color={colors.accent} boxSize={4} />}
                 _hover={{ bg: colors.hover }}
-                rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
               >
                 Performance
               </Button>
@@ -303,7 +309,7 @@ export default function Home() {
         </Box>
 
         {/* Табы Listed/Unlisted Gifts */}
-        <Box bg={colors.panel}>
+        <Box bg={colors.panel} borderBottom="1px solid" borderColor={colors.border}>
           <Container maxW="container.lg" py={2}>
             <HStack spacing={0} bg={colors.buttonBg} borderRadius="lg" p={1}>
               <Button
@@ -313,7 +319,8 @@ export default function Home() {
                 color={activeGiftsTab === 'listed' ? 'white' : colors.muted}
                 onClick={() => setActiveGiftsTab('listed')}
                 _hover={{ bg: activeGiftsTab === 'listed' ? colors.accent : colors.hover }}
-                borderRadius="md"
+                h="32px"
+                fontSize="sm"
               >
                 Listed Gifts
               </Button>
@@ -324,7 +331,8 @@ export default function Home() {
                 color={activeGiftsTab === 'unlisted' ? 'white' : colors.muted}
                 onClick={() => setActiveGiftsTab('unlisted')}
                 _hover={{ bg: activeGiftsTab === 'unlisted' ? colors.accent : colors.hover }}
-                borderRadius="md"
+                h="32px"
+                fontSize="sm"
               >
                 Unlisted Gifts
               </Button>
@@ -332,77 +340,6 @@ export default function Home() {
           </Container>
         </Box>
 
-        {/* Фильтры */}
-        <Box bg={colors.panel}>
-          <Container maxW="container.lg" py={3}>
-            <HStack spacing={4} justify="space-between">
-              <HStack spacing={4}>
-                <Box position="relative" w="150px">
-                  <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
-                    NFTs
-                  </Text>
-                  <Select
-                    variant="filled"
-                    bg={colors.buttonBg}
-                    color={colors.text}
-                    h="45px"
-                    pt="3"
-                    icon={<ChevronDownIcon />}
-                    defaultValue="all"
-                    _hover={{ bg: colors.hover }}
-                    borderRadius="md"
-                  >
-                    <option value="all">All</option>
-                  </Select>
-                </Box>
-                <Box position="relative" w="150px">
-                  <Text position="absolute" top="-3.5" left="4" fontSize="xs" color={colors.muted}>
-                    Model
-                  </Text>
-                  <Select
-                    variant="filled"
-                    bg={colors.buttonBg}
-                    color={colors.text}
-                    h="45px"
-                    pt="3"
-                    icon={<ChevronDownIcon />}
-                    defaultValue="all"
-                    _hover={{ bg: colors.hover }}
-                    borderRadius="md"
-                  >
-                    <option value="all">All</option>
-                  </Select>
-                </Box>
-              </HStack>
-              <HStack spacing={2}>
-                <IconButton
-                  aria-label="Delete"
-                  icon={<Icon as={FaTrash} />}
-                  variant="ghost"
-                  color={colors.muted}
-                  bg={colors.buttonBg}
-                  _hover={{ 
-                    color: colors.accent,
-                    bg: colors.hover
-                  }}
-                  transition="all 0.2s"
-                />
-                <IconButton
-                  aria-label="More"
-                  icon={<ChevronDownIcon />}
-                  variant="ghost"
-                  color={colors.muted}
-                  bg={colors.buttonBg}
-                  _hover={{ 
-                    color: colors.accent,
-                    bg: colors.hover
-                  }}
-                  transition="all 0.2s"
-                />
-              </HStack>
-            </HStack>
-          </Container>
-        </Box>
         <MyGifts />
       </>
     );
@@ -410,30 +347,32 @@ export default function Home() {
     const renderGalleryContent = () => (
       <>
         {/* Volume и Referrals */}
-        <Box bg={colors.panel} py={3}>
-          <Container maxW="container.lg">
-            <HStack spacing={8} justify="space-between">
-              <HStack>
-                <Icon as={FaGift} color={colors.accent} />
-                <Text color={colors.muted}>Volume</Text>
-                <Text color={colors.text} fontWeight="bold">20.18</Text>
+        <Box bg={colors.panel} borderBottom="1px solid" borderColor={colors.border}>
+          <Container maxW="container.lg" py={2}>
+            <HStack spacing={8}>
+              <HStack spacing={2}>
+                <Icon as={FaGift} color={colors.accent} boxSize={4} />
+                <Text color={colors.muted} fontSize="sm">Volume</Text>
+                <Text color={colors.text} fontSize="sm">20.18</Text>
               </HStack>
-              <HStack>
-                <Text color={colors.muted}>Referrals</Text>
-                <Text color={colors.text} fontWeight="bold">1</Text>
+              <HStack spacing={2}>
+                <Text color={colors.muted} fontSize="sm">Referrals</Text>
+                <Text color={colors.text} fontSize="sm">1</Text>
               </HStack>
             </HStack>
           </Container>
         </Box>
 
         {/* Табы */}
-        <Box bg={colors.panel}>
+        <Box bg={colors.panel} borderBottom="1px solid" borderColor={colors.border}>
           <Container maxW="container.lg" py={2}>
-            <HStack spacing={4}>
+            <HStack spacing={2}>
               <Button
                 variant="ghost"
                 color={colors.text}
                 bg={colors.buttonBg}
+                h="32px"
+                fontSize="sm"
                 _hover={{ bg: colors.hover }}
               >
                 Gifts
@@ -441,6 +380,8 @@ export default function Home() {
               <Button
                 variant="ghost"
                 color={colors.muted}
+                h="32px"
+                fontSize="sm"
                 _hover={{ bg: colors.hover }}
               >
                 Activity
@@ -448,6 +389,8 @@ export default function Home() {
               <Button
                 variant="ghost"
                 color={colors.muted}
+                h="32px"
+                fontSize="sm"
                 _hover={{ bg: colors.hover }}
               >
                 Orders
@@ -455,6 +398,8 @@ export default function Home() {
               <Button
                 variant="ghost"
                 color={colors.muted}
+                h="32px"
+                fontSize="sm"
                 _hover={{ bg: colors.hover }}
               >
                 Deals
@@ -463,6 +408,7 @@ export default function Home() {
           </Container>
         </Box>
 
+        {/* Пустое состояние */}
         <Box 
           position="absolute" 
           top="50%" 
@@ -471,7 +417,7 @@ export default function Home() {
           textAlign="center"
           color={colors.muted}
         >
-          <Text fontSize="lg">
+          <Text fontSize="md">
             Gallery is empty
           </Text>
         </Box>
@@ -497,7 +443,7 @@ export default function Home() {
   return (
     <Box 
       bg={colors.bg}
-      height="100vh"
+      minHeight="100vh"
       maxHeight="100vh"
       overflow="hidden"
       display="flex"
@@ -509,140 +455,142 @@ export default function Home() {
       bottom={0}
     >
       {/* Верхняя панель */}
-      <Box bg={colors.panel}>
+      <Box bg={colors.panel} borderBottom="1px solid" borderColor={colors.border}>
         <Container maxW="container.lg" py={2}>
-          <VStack spacing={2}>
-            <HStack spacing={4} justify="space-between" width="100%">
-              <HStack spacing={2} 
-                cursor="pointer" 
-                _hover={{ opacity: 0.8 }}
-                transition="all 0.2s"
-              >
-                <TonLogo />
-                <Text 
-                  fontSize="lg" 
-                  color={colors.text}
-                  fontWeight="500"
-                >{balance}</Text>
-                <ChevronDownIcon 
-                  boxSize={5} 
-                  color={colors.text}
-                />
-              </HStack>
-              <HStack spacing={2}>
-                <IconButton
-                  aria-label="Add balance"
-                  icon={<AddIcon />}
-                  size="sm"
-                  bg={colors.accent}
-                  color="white"
-                  borderRadius="full"
-                  _hover={{ 
-                    opacity: 0.9
-                  }}
-                  transition="all 0.2s"
-                />
-                <IconButton
-                  aria-label="Subtract balance"
-                  icon={<MinusIcon />}
-                  size="sm"
-                  bg={colors.accent}
-                  color="white"
-                  borderRadius="full"
-                  _hover={{ 
-                    opacity: 0.9
-                  }}
-                  transition="all 0.2s"
-                />
-                <Button
-                  bg={colors.accent}
-                  color="white"
-                  size="md"
-                  onClick={connectWallet}
-                  _hover={{ 
-                    opacity: 0.9
-                  }}
-                  transition="all 0.2s"
-                  borderRadius="full"
-                  px={6}
-                  leftIcon={<SmallTonLogo />}
-                >
-                  {connectedWallet ? 'Кошелек подключен' : 'Connect Wallet'}
-                </Button>
-              </HStack>
+          <HStack spacing={4} justify="space-between">
+            <HStack spacing={1}>
+              <TonLogo />
+              <Text color={colors.text} fontSize="sm">0.087</Text>
+              <ChevronDownIcon color={colors.text} boxSize={4} />
             </HStack>
-
-            {activeTab === 'gifts' && (
-              <HStack spacing={4} width="100%">
-                <Button
-                  variant="ghost"
-                  color={colors.text}
-                  bg={colors.buttonBg}
-                  flex="1"
-                  _hover={{ bg: colors.hover }}
-                  rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
-                >
-                  Internal Purchase
-                </Button>
-                <Button
-                  variant="ghost"
-                  color={colors.text}
-                  bg={colors.buttonBg}
-                  flex="1"
-                  _hover={{ bg: colors.hover }}
-                  rightIcon={<Icon as={FaInfoCircle} color={colors.accent} />}
-                >
-                  Performance
-                </Button>
-              </HStack>
-            )}
-          </VStack>
+            <HStack spacing={2}>
+              <IconButton
+                aria-label="Add"
+                icon={<AddIcon boxSize={3} />}
+                size="sm"
+                bg={colors.accent}
+                color="white"
+                borderRadius="full"
+                h="24px"
+                minW="24px"
+                _hover={{ opacity: 0.8 }}
+              />
+              <IconButton
+                aria-label="Subtract"
+                icon={<MinusIcon boxSize={3} />}
+                size="sm"
+                bg={colors.accent}
+                color="white"
+                borderRadius="full"
+                h="24px"
+                minW="24px"
+                _hover={{ opacity: 0.8 }}
+              />
+              <Button
+                leftIcon={<SmallTonLogo />}
+                bg={colors.accent}
+                color="white"
+                size="sm"
+                borderRadius="full"
+                h="24px"
+                px={3}
+                fontSize="xs"
+                _hover={{ opacity: 0.8 }}
+                onClick={connectWallet}
+              >
+                Connect Wallet
+              </Button>
+            </HStack>
+          </HStack>
         </Container>
       </Box>
 
-      {/* Основной контент с фильтрами */}
-      <Box 
-        flex="1" 
-        overflow="auto" 
-        bg={colors.bg}
-        position="relative"
-      >
+      {/* Фильтры */}
+      <Box bg={colors.panel} borderBottom="1px solid" borderColor={colors.border}>
+        <Container maxW="container.lg" py={2}>
+          <HStack spacing={4} justify="space-between">
+            <HStack spacing={2}>
+              <Box position="relative" w="120px">
+                <Text position="absolute" top="-2.5" left="3" fontSize="xs" color={colors.muted}>
+                  NFTs
+                </Text>
+                <Select
+                  bg={colors.buttonBg}
+                  color={colors.text}
+                  border="none"
+                  h="36px"
+                  pt="2"
+                  fontSize="sm"
+                  icon={<ChevronDownIcon boxSize={4} />}
+                  defaultValue="all"
+                  _hover={{ bg: colors.hover }}
+                >
+                  <option value="all">All</option>
+                </Select>
+              </Box>
+              <Box position="relative" w="120px">
+                <Text position="absolute" top="-2.5" left="3" fontSize="xs" color={colors.muted}>
+                  Model
+                </Text>
+                <Select
+                  bg={colors.buttonBg}
+                  color={colors.text}
+                  border="none"
+                  h="36px"
+                  pt="2"
+                  fontSize="sm"
+                  icon={<ChevronDownIcon boxSize={4} />}
+                  defaultValue="all"
+                  _hover={{ bg: colors.hover }}
+                >
+                  <option value="all">All</option>
+                </Select>
+              </Box>
+            </HStack>
+            <HStack spacing={2}>
+              <IconButton
+                aria-label="Delete"
+                icon={<Icon as={FaTrash} boxSize={4} />}
+                variant="ghost"
+                color={colors.muted}
+                bg={colors.buttonBg}
+                h="36px"
+                w="36px"
+                _hover={{ bg: colors.hover }}
+              />
+              <IconButton
+                aria-label="More"
+                icon={<ChevronDownIcon boxSize={4} />}
+                variant="ghost"
+                color={colors.muted}
+                bg={colors.buttonBg}
+                h="36px"
+                w="36px"
+                _hover={{ bg: colors.hover }}
+              />
+            </HStack>
+          </HStack>
+        </Container>
+      </Box>
+
+      {/* Основной контент */}
+      <Box flex="1" overflow="auto" bg={colors.bg}>
         {renderContent()}
-        
-        {/* Текст внизу основного контента */}
-        <Box
-          position="absolute"
-          bottom={20}
-          left="50%"
-          transform="translateX(-50%)"
-          textAlign="center"
-          color={colors.muted}
-        >
-          <Text>Want to sell your Gift?</Text>
-          <Text>Transfer it to <Text as="span" color={colors.accent}>@GiftRelayer</Text></Text>
-        </Box>
       </Box>
 
       {/* Нижняя навигация */}
-      <Box 
-        borderTop="1px solid"
-        borderColor={colors.border}
-        py={3}
-        bg={colors.panel}
-      >
-        <Container maxW="container.lg">
+      <Box bg={colors.panel} borderTop="1px solid" borderColor={colors.border}>
+        <Container maxW="container.lg" py={2}>
           <HStack justify="space-between">
             <VStack 
               spacing={1} 
               color={activeTab === 'market' ? colors.accent : colors.muted}
               cursor="pointer"
               onClick={() => setActiveTab('market')}
-              _hover={{ 
-                color: colors.accent
-              }}
-              transition="all 0.2s"
+              _hover={{ color: colors.accent }}
+              w="64px"
             >
-              <Icon as={FaShoppingCart} boxSize={5} />
+              <Icon as={FaShoppingCart} boxSize={4} />
               <Text fontSize="xs">Market</Text>
             </VStack>
             <VStack 
@@ -650,12 +598,10 @@ export default function Home() {
               color={activeTab === 'auctions' ? colors.accent : colors.muted}
               cursor="pointer"
               onClick={() => setActiveTab('auctions')}
-              _hover={{ 
-                color: colors.accent
-              }}
-              transition="all 0.2s"
+              _hover={{ color: colors.accent }}
+              w="64px"
             >
-              <Icon as={FaGavel} boxSize={5} />
+              <Icon as={FaGavel} boxSize={4} />
               <Text fontSize="xs">Auctions</Text>
             </VStack>
             <VStack 
@@ -663,12 +609,10 @@ export default function Home() {
               color={activeTab === 'gifts' ? colors.accent : colors.muted}
               cursor="pointer"
               onClick={() => setActiveTab('gifts')}
-              _hover={{ 
-                color: colors.accent
-              }}
-              transition="all 0.2s"
+              _hover={{ color: colors.accent }}
+              w="64px"
             >
-              <Icon as={FaGift} boxSize={5} />
+              <Icon as={FaGift} boxSize={4} />
               <Text fontSize="xs">My Gifts</Text>
             </VStack>
             <VStack 
@@ -676,12 +620,10 @@ export default function Home() {
               color={activeTab === 'gallery' ? colors.accent : colors.muted}
               cursor="pointer"
               onClick={() => setActiveTab('gallery')}
-              _hover={{ 
-                color: colors.accent
-              }}
-              transition="all 0.2s"
+              _hover={{ color: colors.accent }}
+              w="64px"
             >
-              <Icon as={FaImages} boxSize={5} />
+              <Icon as={FaImages} boxSize={4} />
               <Text fontSize="xs">Gallery</Text>
             </VStack>
             <VStack 
@@ -689,12 +631,10 @@ export default function Home() {
               color={activeTab === 'activity' ? colors.accent : colors.muted}
               cursor="pointer"
               onClick={() => setActiveTab('activity')}
-              _hover={{ 
-                color: colors.accent
-              }}
-              transition="all 0.2s"
+              _hover={{ color: colors.accent }}
+              w="64px"
             >
-              <Icon as={FaChartLine} boxSize={5} />
+              <Icon as={FaChartLine} boxSize={4} />
               <Text fontSize="xs">Activity</Text>
             </VStack>
           </HStack>

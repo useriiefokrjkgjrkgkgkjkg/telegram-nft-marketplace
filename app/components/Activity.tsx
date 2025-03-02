@@ -22,6 +22,7 @@ export const Activity = () => {
     border: '#253340',
     muted: '#6D7883',
     hover: '#253340',
+    orange: '#FF9500'
   };
 
   const activities: ActivityItem[] = [
@@ -61,38 +62,42 @@ export const Activity = () => {
   ];
 
   return (
-    <Container maxW="container.lg" py={4}>
+    <Container maxW="container.lg" py={2}>
       <VStack spacing={2} align="stretch">
         {activities.map((activity) => (
           <Box
             key={activity.id}
             bg={colors.panel}
-            p={4}
+            p={3}
             borderRadius="lg"
             _hover={{ bg: colors.hover }}
             cursor="pointer"
           >
             <HStack spacing={4} justify="space-between">
-              <HStack spacing={4} flex={1}>
+              <HStack spacing={3} flex={1}>
                 <Image
                   src={activity.gift.image}
                   alt={activity.gift.name}
-                  boxSize="40px"
+                  boxSize="36px"
                   borderRadius="md"
                   objectFit="cover"
                 />
                 <VStack align="start" spacing={0}>
-                  <Text color={colors.text} fontSize="sm">{activity.gift.name}</Text>
-                  <Text color={colors.muted} fontSize="xs">{activity.gift.number}</Text>
+                  <Text color={colors.text} fontSize="sm">
+                    {activity.gift.name}
+                  </Text>
+                  <Text color={colors.muted} fontSize="xs">
+                    {activity.gift.number}
+                  </Text>
                 </VStack>
               </HStack>
               
               <HStack spacing={4} flex={1} justify="space-between">
                 <Text color={colors.text} fontSize="sm">
-                  ₸ {activity.price}
+                  {activity.price} ₸
                 </Text>
                 <Text 
-                  color={activity.type === 'Sale' ? colors.accent : '#FF9500'} 
+                  color={activity.type === 'Sale' ? colors.accent : colors.orange} 
                   fontSize="sm"
                 >
                   {activity.type}
@@ -100,7 +105,7 @@ export const Activity = () => {
                 <Text color={colors.muted} fontSize="xs">
                   {activity.date}
                 </Text>
-                <Icon as={FaChevronRight} color={colors.muted} />
+                <Icon as={FaChevronRight} color={colors.muted} boxSize={3} />
               </HStack>
             </HStack>
           </Box>

@@ -1,4 +1,4 @@
-import { Box, Text, Container, SimpleGrid, HStack, Icon, Button, VStack, Image } from '@chakra-ui/react';
+import { Box, Text, Container, SimpleGrid, HStack, Icon, Button, Image } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 
 interface NFTCard {
@@ -52,15 +52,15 @@ export const Market = () => {
   ];
 
   return (
-    <Container maxW="container.lg" py={4}>
+    <Container maxW="container.lg" py={2}>
       {/* Корзина и счетчик */}
-      <HStack spacing={2} mb={4}>
-        <Icon as={FaShoppingCart} color={colors.muted} />
-        <Text color={colors.muted}>0</Text>
+      <HStack spacing={2} mb={2}>
+        <Icon as={FaShoppingCart} color={colors.muted} boxSize={4} />
+        <Text color={colors.muted} fontSize="sm">0</Text>
       </HStack>
 
       {/* Сетка NFT карточек */}
-      <SimpleGrid columns={2} spacing={4}>
+      <SimpleGrid columns={2} spacing={3}>
         {nfts.map((nft) => (
           <Box
             key={nft.id}
@@ -73,7 +73,7 @@ export const Market = () => {
               src={nft.image}
               alt={nft.name}
               w="100%"
-              h="150px"
+              h="160px"
               objectFit="cover"
             />
             
@@ -86,16 +86,20 @@ export const Market = () => {
               borderRadius="full"
               p={2}
               cursor="pointer"
-              _hover={{ opacity: 0.9 }}
+              _hover={{ opacity: 0.8 }}
             >
-              <Icon as={FaShoppingCart} color="white" boxSize={5} />
+              <Icon as={FaShoppingCart} color="white" boxSize={4} />
             </Box>
 
             {/* Информация о NFT */}
-            <VStack align="stretch" p={4} spacing={1}>
-              <HStack justify="space-between">
-                <Text color={colors.text} fontSize="md">{nft.name}</Text>
-                <Text color={colors.muted} fontSize="sm">{nft.number}</Text>
+            <Box p={3}>
+              <HStack justify="space-between" mb={2}>
+                <Text color={colors.text} fontSize="sm" fontWeight="medium">
+                  {nft.name}
+                </Text>
+                <Text color={colors.muted} fontSize="xs">
+                  {nft.number}
+                </Text>
               </HStack>
               
               <Button
@@ -103,11 +107,13 @@ export const Market = () => {
                 color="white"
                 size="sm"
                 width="100%"
-                _hover={{ opacity: 0.9 }}
+                height="32px"
+                fontSize="sm"
+                _hover={{ opacity: 0.8 }}
               >
                 {nft.price} ₸
               </Button>
-            </VStack>
+            </Box>
           </Box>
         ))}
       </SimpleGrid>
