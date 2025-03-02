@@ -1,125 +1,184 @@
-import { Box, Text, Container, SimpleGrid, HStack, Button, Image } from '@chakra-ui/react';
+import { Box, Text, Container, Icon, HStack, Select, IconButton } from '@chakra-ui/react';
+import { keyframes } from '@emotion/react';
+import { FaGavel, FaChevronDown } from 'react-icons/fa';
 
-interface AuctionCard {
-  id: string;
-  name: string;
-  image: string;
-  number: string;
-  highestBid: number;
-  timeLeft: {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  };
-}
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const float = keyframes`
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(-2deg); }
+  75% { transform: translateY(5px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+`;
 
 export const Auctions = () => {
   const colors = {
-    bg: '#17212B',
-    panel: '#242F3D',
-    accent: '#0098EA',
+    bg: '#0A0F15',
+    panel: '#151C24',
+    accent: '#2D7AF4',
     text: '#FFFFFF',
-    border: '#253340',
-    muted: '#6D7883',
-    hover: '#253340',
+    border: '#1E2730',
+    muted: '#4A5561',
+    hover: '#1A2330',
+    gradient: 'linear-gradient(135deg, #2D7AF4 0%, #14B4FF 100%)',
   };
-
-  const auctions: AuctionCard[] = [
-    {
-      id: '1',
-      name: 'Record Player',
-      image: '/nft/record-player.jpg',
-      number: '#4511',
-      highestBid: 4.5,
-      timeLeft: { days: 0, hours: 0, minutes: 0, seconds: 0 }
-    },
-    {
-      id: '2',
-      name: 'Scared Cat',
-      image: '/nft/scared-cat.jpg',
-      number: '#15501',
-      highestBid: 8,
-      timeLeft: { days: 0, hours: 0, minutes: 0, seconds: 0 }
-    },
-    {
-      id: '3',
-      name: 'Skull Flower',
-      image: '/nft/skull-flower.jpg',
-      number: '#9375',
-      highestBid: 3.2,
-      timeLeft: { days: 0, hours: 0, minutes: 0, seconds: 0 }
-    },
-    {
-      id: '4',
-      name: 'Desk Calendar',
-      image: '/nft/desk-calendar.jpg',
-      number: '#12921',
-      highestBid: 2.8,
-      timeLeft: { days: 0, hours: 0, minutes: 0, seconds: 0 }
-    }
-  ];
 
   return (
     <Container maxW="container.lg" py={2}>
-      <SimpleGrid columns={2} spacing={3}>
-        {auctions.map((auction) => (
-          <Box
-            key={auction.id}
-            bg={colors.panel}
-            borderRadius="xl"
-            overflow="hidden"
-          >
-            <Image
-              src={auction.image}
-              alt={auction.name}
-              w="100%"
-              h="160px"
-              objectFit="cover"
-            />
-            
-            <Box p={3}>
-              <HStack justify="space-between" mb={2}>
-                <Text color={colors.text} fontSize="sm" fontWeight="medium">
-                  {auction.name}
-                </Text>
-                <Text color={colors.muted} fontSize="xs">
-                  {auction.number}
-                </Text>
-              </HStack>
-              
-              <HStack justify="space-between" mb={2}>
-                <Text color={colors.muted} fontSize="xs">Highest Bid</Text>
-                <Text color={colors.text} fontSize="sm">
-                  {auction.highestBid} ₸
-                </Text>
-              </HStack>
-              
-              <HStack justify="center" spacing={1} mb={2} fontSize="xs" color={colors.muted}>
-                <Text>{auction.timeLeft.days}d</Text>
-                <Text>:</Text>
-                <Text>{auction.timeLeft.hours}h</Text>
-                <Text>:</Text>
-                <Text>{auction.timeLeft.minutes}m</Text>
-                <Text>:</Text>
-                <Text>{auction.timeLeft.seconds}s</Text>
-              </HStack>
-              
-              <Button
-                bg={colors.accent}
-                color="white"
-                size="sm"
-                width="100%"
-                height="32px"
-                fontSize="sm"
-                _hover={{ opacity: 0.8 }}
+      {/* Фильтры */}
+      <Box 
+        bg={colors.panel} 
+        p={4} 
+        borderRadius="2xl" 
+        mb={4}
+        border="1px solid"
+        borderColor={colors.border}
+        animation={`${fadeIn} 0.3s ease-out`}
+      >
+        <HStack spacing={4} justify="space-between">
+          <HStack spacing={4}>
+            <Box position="relative" w="120px">
+              <Text 
+                position="absolute" 
+                top="-2.5" 
+                left="3" 
+                fontSize="xs" 
+                color={colors.muted}
+                fontWeight="500"
               >
-                Bid {auction.highestBid} ₸
-              </Button>
+                NFTs
+              </Text>
+              <Select
+                bg={colors.hover}
+                color={colors.text}
+                border="none"
+                h="36px"
+                pt="2"
+                fontSize="sm"
+                icon={<Icon as={FaChevronDown} color={colors.muted} />}
+                _hover={{ bg: colors.hover }}
+                _focus={{ 
+                  boxShadow: 'none',
+                  borderColor: colors.accent 
+                }}
+                css={{
+                  '& option': {
+                    bg: colors.panel,
+                  }
+                }}
+              >
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="ending">Ending Soon</option>
+              </Select>
             </Box>
-          </Box>
-        ))}
-      </SimpleGrid>
+            <Box position="relative" w="120px">
+              <Text 
+                position="absolute" 
+                top="-2.5" 
+                left="3" 
+                fontSize="xs" 
+                color={colors.muted}
+                fontWeight="500"
+              >
+                Price
+              </Text>
+              <Select
+                bg={colors.hover}
+                color={colors.text}
+                border="none"
+                h="36px"
+                pt="2"
+                fontSize="sm"
+                icon={<Icon as={FaChevronDown} color={colors.muted} />}
+                _hover={{ bg: colors.hover }}
+                _focus={{ 
+                  boxShadow: 'none',
+                  borderColor: colors.accent 
+                }}
+                css={{
+                  '& option': {
+                    bg: colors.panel,
+                  }
+                }}
+              >
+                <option value="all">All</option>
+                <option value="low">Low to High</option>
+                <option value="high">High to Low</option>
+              </Select>
+            </Box>
+          </HStack>
+          <HStack spacing={2}>
+            <IconButton
+              aria-label="More options"
+              icon={<Icon as={FaChevronDown} boxSize={4} />}
+              variant="ghost"
+              color={colors.muted}
+              bg={colors.hover}
+              h="36px"
+              w="36px"
+              _hover={{ 
+                color: colors.accent,
+                transform: 'scale(1.05)'
+              }}
+              transition="all 0.2s ease"
+            />
+          </HStack>
+        </HStack>
+      </Box>
+
+      <Box 
+        position="absolute" 
+        top="50%" 
+        left="50%" 
+        transform="translate(-50%, -50%)"
+        textAlign="center"
+        color={colors.muted}
+        animation={`${fadeIn} 0.6s ease-out`}
+        width="100%"
+        maxW="400px"
+      >
+        <Box
+          bg={colors.panel}
+          p={10}
+          borderRadius="3xl"
+          boxShadow="0 12px 40px rgba(0,0,0,0.4)"
+          backdropFilter="blur(20px)"
+          border="1px solid"
+          borderColor={colors.border}
+          animation={`${float} 4s infinite ease-in-out`}
+          transition="all 0.3s ease"
+          _hover={{
+            transform: 'scale(1.02)',
+            bg: colors.hover,
+            boxShadow: '0 16px 60px rgba(0,0,0,0.5)',
+            borderColor: colors.accent
+          }}
+        >
+          <Icon 
+            as={FaGavel} 
+            boxSize={10} 
+            color="transparent"
+            mb={6}
+            bgGradient={colors.gradient}
+            bgClip="text"
+          />
+          <Text 
+            fontSize="sm"
+            fontWeight="500"
+            letterSpacing="0.1em"
+            bgGradient={colors.gradient}
+            bgClip="text"
+            textTransform="uppercase"
+            opacity={0.9}
+          >
+            No gifts found with the filters you selected
+          </Text>
+        </Box>
+      </Box>
     </Container>
   );
 }; 
