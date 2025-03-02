@@ -40,10 +40,10 @@ declare global {
 // Компонент для логотипа TON
 const TonLogo = ({ size = "24px" }: { size?: string }) => (
   <Image 
-    src="/icons/ton-logo.svg" 
+    src="/icons/ton-logo.svg"
     alt="TON" 
     width={size} 
-    height={size} 
+    height={size}
   />
 );
 
