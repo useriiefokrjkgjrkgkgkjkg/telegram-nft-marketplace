@@ -21,7 +21,7 @@ import { Market } from './components/Market';
 import { Auctions } from './components/Auctions';
 import { MyGifts } from './components/MyGifts';
 import { Activity } from './components/Activity';
-import { ModelSelector } from './components/ModelSelector';
+import { NFTSelector } from './components/NFTSelector';
 
 const fadeInAnimation = keyframes`
   from { opacity: 0; }
@@ -47,7 +47,7 @@ export default function Home() {
   const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('market');
   const [activeGiftsTab, setActiveGiftsTab] = useState('listed');
-  const [selectedModel, setSelectedModel] = useState('all');
+  const [selectedNFT, setSelectedNFT] = useState('all');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   
@@ -293,7 +293,7 @@ export default function Home() {
             <HStack spacing={2}>
               <Box position="relative" w="120px">
                 <Text position="absolute" top="-2.5" left="3" fontSize="xs" color={colors.muted}>
-                  NFTs
+                  Price
                 </Text>
                 <Select
                   bg={colors.buttonBg}
@@ -307,11 +307,14 @@ export default function Home() {
                   _hover={{ bg: colors.hover }}
                 >
                   <option value="all">All</option>
+                  <option value="0-1">0-1 TON</option>
+                  <option value="1-5">1-5 TON</option>
+                  <option value="5+">5+ TON</option>
                 </Select>
               </Box>
               <Box position="relative" w="120px">
                 <Text position="absolute" top="-2.5" left="3" fontSize="xs" color={colors.muted}>
-                  Model
+                  NFT
                 </Text>
                 <Box
                   as="button"
@@ -328,7 +331,7 @@ export default function Home() {
                   _hover={{ bg: colors.hover }}
                   onClick={onOpen}
                 >
-                  <Text>{selectedModel === 'all' ? 'All' : selectedModel}</Text>
+                  <Text>{selectedNFT === 'all' ? 'All' : selectedNFT}</Text>
                   <ChevronDownIcon boxSize={4} color={colors.muted} />
                 </Box>
               </Box>
@@ -427,15 +430,15 @@ export default function Home() {
         </Container>
       </Box>
 
-      {/* Модальное окно выбора модели */}
-      <ModelSelector
+      {/* Модальное окно выбора NFT */}
+      <NFTSelector
         isOpen={isOpen}
         onClose={onClose}
-        onSelect={(model) => {
-          setSelectedModel(model.name);
+        onSelect={(nft) => {
+          setSelectedNFT(nft.name);
           toast({
-            title: "Model selected",
-            description: `You selected ${model.name}`,
+            title: "NFT selected",
+            description: `You selected ${nft.name} (${nft.price} TON)`,
             status: "success",
             duration: 2000,
             isClosable: true,
