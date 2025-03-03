@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon, StarIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
-import { BsThreeDots } from 'react-icons/bs';
+import { BsThreeDots, BsChevronRight } from 'react-icons/bs';
 import { FaImage, FaGift } from 'react-icons/fa';
 
 // Объявляем типы для Telegram WebApp
@@ -179,9 +179,13 @@ export default function Home() {
             width="140px"
             height="40px"
             px={3}
+            justifyContent="space-between"
           >
-            <FaImage size={16} />
-            <Text>Модель</Text>
+            <HStack>
+              <FaImage size={16} />
+              <Text>Модель</Text>
+            </HStack>
+            <BsChevronRight size={16} />
           </Button>
           <Button
             variant="ghost"
@@ -200,9 +204,13 @@ export default function Home() {
             width="140px"
             height="40px"
             px={3}
+            justifyContent="space-between"
           >
-            <FaGift size={16} />
-            <Text>Стиль</Text>
+            <HStack>
+              <FaGift size={16} />
+              <Text>Стиль</Text>
+            </HStack>
+            <BsChevronRight size={16} />
           </Button>
         </HStack>
       </Box>
