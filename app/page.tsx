@@ -152,6 +152,48 @@ export default function Home() {
         </HStack>
       </Box>
 
+      {/* Панель навигации */}
+      <Box 
+        bg="#17212B" 
+        py={2} 
+        px={4}
+        borderBottom="1px solid"
+        borderColor="#253340"
+      >
+        <HStack justify="space-between" align="center">
+          <Button
+            variant="ghost"
+            color="#0098EA"
+            fontSize="16px"
+            fontWeight="400"
+            p={0}
+            _hover={{ bg: 'transparent', opacity: 0.8 }}
+          >
+            NFT
+          </Button>
+          <Button
+            variant="ghost"
+            color="#0098EA"
+            fontSize="16px"
+            fontWeight="400"
+            p={0}
+            _hover={{ bg: 'transparent', opacity: 0.8 }}
+          >
+            Gifts
+          </Button>
+          <Button
+            variant="ghost"
+            color="#0098EA"
+            fontSize="16px"
+            fontWeight="400"
+            p={0}
+            _hover={{ bg: 'transparent', opacity: 0.8 }}
+          >
+            Profile
+          </Button>
+        </HStack>
+      </Box>
+
       {/* Основной контент с ошибкой */}
       <Box 
         flex="1"
