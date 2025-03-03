@@ -176,8 +176,8 @@ export default function Home() {
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
-            width="80px"
-            height="80px"
+            width="100px"
+            height="60px"
           >
             <FaImage size={20} />
             <Text>NFT</Text>
@@ -196,8 +196,8 @@ export default function Home() {
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
-            width="80px"
-            height="80px"
+            width="100px"
+            height="60px"
           >
             <FaGift size={20} />
             <Text>Gifts</Text>
@@ -216,8 +216,8 @@ export default function Home() {
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
-            width="80px"
-            height="80px"
+            width="100px"
+            height="60px"
           >
             <FaUser size={20} />
             <Text>Profile</Text>
