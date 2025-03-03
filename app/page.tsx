@@ -181,7 +181,7 @@ export default function Home() {
             px={3}
             position="relative"
           >
-            <Text color="whiteAlpha.700" fontSize="xs" position="absolute" left={2} top={1}>NFT's</Text>
+            <Text color="whiteAlpha.700" fontSize="xs" position="absolute" left={2} top={1}>Модель</Text>
             <Text color="white" fontSize="md" position="absolute" left={2} top="70%" transform="translateY(-50%)">All</Text>
             <Box position="absolute" right={3} top="50%" transform="translateY(-50%)">
               <BsChevronRight size={16} />
