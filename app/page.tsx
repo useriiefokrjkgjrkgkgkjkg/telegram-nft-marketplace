@@ -20,7 +20,7 @@ import {
 import { AddIcon, MinusIcon, StarIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
-import { FaImage, FaGift, FaUser } from 'react-icons/fa';
+import { FaImage, FaGift } from 'react-icons/fa';
 
 // Объявляем типы для Telegram WebApp
 declare global {
@@ -161,7 +161,7 @@ export default function Home() {
         borderBottom="1px solid"
         borderColor="#253340"
       >
-        <HStack justify="space-between" align="center" spacing={0}>
+        <HStack justify="center" align="center" spacing={4}>
           <Button
             variant="ghost"
             color="white"
@@ -203,27 +203,6 @@ export default function Home() {
           >
             <FaGift size={16} />
             <Text>Gifts</Text>
-          </Button>
-          <Button
-            variant="ghost"
-            color="white"
-            fontSize="16px"
-            fontWeight="500"
-            p={0}
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
-            gap={2}
-            _hover={{ bg: 'transparent', opacity: 0.8 }}
-            border="1px solid"
-            borderColor="#253340"
-            borderRadius="md"
-            width="120px"
-            height="40px"
-            px={3}
-          >
-            <FaUser size={16} />
-            <Text>Profile</Text>
           </Button>
         </HStack>
       </Box>
