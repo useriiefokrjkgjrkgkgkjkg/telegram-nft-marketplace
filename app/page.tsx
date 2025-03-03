@@ -169,17 +169,18 @@ export default function Home() {
             fontWeight="500"
             p={0}
             display="flex"
-            flexDirection="column"
+            flexDirection="row"
             alignItems="center"
-            gap={1}
+            gap={2}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
             width="120px"
-            height="50px"
+            height="40px"
+            px={3}
           >
-            <FaImage size={20} />
+            <FaImage size={16} />
             <Text>NFT</Text>
           </Button>
           <Button
@@ -189,17 +190,18 @@ export default function Home() {
             fontWeight="500"
             p={0}
             display="flex"
-            flexDirection="column"
+            flexDirection="row"
             alignItems="center"
-            gap={1}
+            gap={2}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
             width="120px"
-            height="50px"
+            height="40px"
+            px={3}
           >
-            <FaGift size={20} />
+            <FaGift size={16} />
             <Text>Gifts</Text>
           </Button>
           <Button
@@ -209,17 +211,18 @@ export default function Home() {
             fontWeight="500"
             p={0}
             display="flex"
-            flexDirection="column"
+            flexDirection="row"
             alignItems="center"
-            gap={1}
+            gap={2}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
             width="120px"
-            height="50px"
+            height="40px"
+            px={3}
           >
-            <FaUser size={20} />
+            <FaUser size={16} />
             <Text>Profile</Text>
           </Button>
         </HStack>
