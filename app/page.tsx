@@ -173,6 +173,11 @@ export default function Home() {
             alignItems="center"
             gap={1}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
+            border="1px solid"
+            borderColor="#253340"
+            borderRadius="md"
+            width="80px"
+            height="80px"
           >
             <FaImage size={20} />
             <Text>NFT</Text>
@@ -188,6 +193,11 @@ export default function Home() {
             alignItems="center"
             gap={1}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
+            border="1px solid"
+            borderColor="#253340"
+            borderRadius="md"
+            width="80px"
+            height="80px"
           >
             <FaGift size={20} />
             <Text>Gifts</Text>
@@ -203,6 +213,11 @@ export default function Home() {
             alignItems="center"
             gap={1}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
+            border="1px solid"
+            borderColor="#253340"
+            borderRadius="md"
+            width="80px"
+            height="80px"
           >
             <FaUser size={20} />
             <Text>Profile</Text>
