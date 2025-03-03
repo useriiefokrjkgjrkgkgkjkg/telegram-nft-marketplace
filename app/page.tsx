@@ -84,6 +84,14 @@ export default function Home() {
       bottom={0}
       overflow="hidden"
       overflowX="hidden"
+      overflowY="hidden"
+      style={{
+        WebkitTouchCallout: 'none',
+        WebkitUserSelect: 'none',
+        WebkitTapHighlightColor: 'transparent',
+        WebkitTextSizeAdjust: 'none',
+        WebkitOverflowScrolling: 'touch'
+      }}
     >
       {/* Панель с балансом */}
       <Box 
