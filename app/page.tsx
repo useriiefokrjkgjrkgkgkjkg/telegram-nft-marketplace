@@ -20,6 +20,7 @@ import {
 import { AddIcon, MinusIcon, StarIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
+import { FaImage, FaGift, FaUser } from 'react-icons/fa';
 
 // Объявляем типы для Telegram WebApp
 declare global {
@@ -155,41 +156,56 @@ export default function Home() {
       {/* Панель навигации */}
       <Box 
         bg="#17212B" 
-        py={2} 
+        py={3} 
         px={4}
         borderBottom="1px solid"
         borderColor="#253340"
       >
-        <HStack justify="space-between" align="center">
+        <HStack justify="space-between" align="center" spacing={0}>
           <Button
             variant="ghost"
             color="#0098EA"
             fontSize="16px"
-            fontWeight="400"
+            fontWeight="500"
             p={0}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap={1}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
           >
-            NFT
+            <FaImage size={20} />
+            <Text>NFT</Text>
           </Button>
           <Button
             variant="ghost"
             color="#0098EA"
             fontSize="16px"
-            fontWeight="400"
+            fontWeight="500"
             p={0}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap={1}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
           >
-            Gifts
+            <FaGift size={20} />
+            <Text>Gifts</Text>
           </Button>
           <Button
             variant="ghost"
             color="#0098EA"
             fontSize="16px"
-            fontWeight="400"
+            fontWeight="500"
             p={0}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap={1}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
           >
-            Profile
+            <FaUser size={20} />
+            <Text>Profile</Text>
           </Button>
         </HStack>
       </Box>
