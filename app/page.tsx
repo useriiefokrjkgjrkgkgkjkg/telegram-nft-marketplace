@@ -83,44 +83,6 @@ export default function Home() {
       bottom={0}
       overflow="hidden"
     >
-      {/* Верхняя панель */}
-      <Box 
-        bg="#17212B" 
-        py={4} 
-        px={4}
-        borderBottom="1px solid"
-        borderColor="#253340"
-      >
-        <HStack justify="space-between" align="center">
-          <Button
-            variant="ghost"
-            color="#0098EA"
-            fontSize="16px"
-            fontWeight="400"
-            p={0}
-            _hover={{ bg: 'transparent', opacity: 0.8 }}
-            onClick={() => window.Telegram?.WebApp?.close()}
-          >
-            Закрыть
-          </Button>
-          <HStack spacing={4}>
-            <Text color="white" fontSize="16px" fontWeight="500">
-              nft market
-            </Text>
-            <Text color="#6D7883" fontSize="14px">
-              мини-приложение
-            </Text>
-          </HStack>
-          <IconButton
-            aria-label="Menu"
-            icon={<BsThreeDots />}
-            variant="ghost"
-            color="#0098EA"
-            _hover={{ bg: 'transparent', opacity: 0.8 }}
-          />
-        </HStack>
-      </Box>
-
       {/* Панель с балансом */}
       <Box 
         bg="#17212B" 
