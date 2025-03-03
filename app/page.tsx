@@ -169,9 +169,9 @@ export default function Home() {
             fontWeight="500"
             p={0}
             display="flex"
-            flexDirection="row"
-            alignItems="center"
-            gap={2}
+            flexDirection="column"
+            alignItems="flex-start"
+            gap={0}
             _hover={{ bg: 'transparent', opacity: 0.8 }}
             border="1px solid"
             borderColor="#253340"
@@ -179,13 +179,13 @@ export default function Home() {
             width="140px"
             height="40px"
             px={3}
-            justifyContent="space-between"
+            position="relative"
           >
-            <HStack>
-              <FaImage size={16} />
-              <Text>NFT's</Text>
-            </HStack>
-            <BsChevronRight size={16} />
+            <Text color="#6D7883" fontSize="xs" mt={1}>NFT's</Text>
+            <Text color="white" fontSize="sm" position="absolute" left={3} top="50%" transform="translateY(-50%)">All</Text>
+            <Box position="absolute" right={3} top="50%" transform="translateY(-50%)">
+              <BsChevronRight size={16} />
+            </Box>
           </Button>
           <Button
             variant="ghost"
