@@ -140,7 +140,7 @@ export default function Home() {
             borderRadius="full"
             size="md"
             px={4}
-            ml={-1}
+            ml={-2}
             leftIcon={<StarIcon />}
             _hover={{ bg: "#0088D1" }}
           >
