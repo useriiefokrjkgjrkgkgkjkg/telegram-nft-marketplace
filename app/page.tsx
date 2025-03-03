@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon, StarIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
-import { BsThreeDots, BsChevronRight } from 'react-icons/bs';
+import { BsThreeDots, BsChevronRight, BsTrash, BsChevronDown } from 'react-icons/bs';
 import { FaImage, FaGift } from 'react-icons/fa';
 
 // Объявляем типы для Telegram WebApp
@@ -161,57 +161,87 @@ export default function Home() {
         borderBottom="1px solid"
         borderColor="#253340"
       >
-        <HStack justify="flex-start" align="center" spacing={4}>
-          <Button
-            variant="ghost"
-            color="white"
-            fontSize="16px"
-            fontWeight="500"
-            p={0}
-            display="flex"
-            flexDirection="column"
-            alignItems="flex-start"
-            gap={0}
-            _hover={{ bg: 'transparent', opacity: 0.8 }}
-            border="1px solid"
-            borderColor="#253340"
-            borderRadius="md"
-            width="140px"
-            height="40px"
-            px={3}
-            position="relative"
-          >
-            <Text color="whiteAlpha.700" fontSize="xs" position="absolute" left={2} top={1}>NFT's</Text>
-            <Text color="white" fontSize="md" position="absolute" left={2} top="70%" transform="translateY(-50%)">All</Text>
-            <Box position="absolute" right={3} top="50%" transform="translateY(-50%)">
-              <BsChevronRight size={16} />
-            </Box>
-          </Button>
-          <Button
-            variant="ghost"
-            color="white"
-            fontSize="16px"
-            fontWeight="500"
-            p={0}
-            display="flex"
-            flexDirection="column"
-            alignItems="flex-start"
-            gap={0}
-            _hover={{ bg: 'transparent', opacity: 0.8 }}
-            border="1px solid"
-            borderColor="#253340"
-            borderRadius="md"
-            width="140px"
-            height="40px"
-            px={3}
-            position="relative"
-          >
-            <Text color="whiteAlpha.700" fontSize="xs" position="absolute" left={2} top={1}>Модель</Text>
-            <Text color="white" fontSize="md" position="absolute" left={2} top="70%" transform="translateY(-50%)">All</Text>
-            <Box position="absolute" right={3} top="50%" transform="translateY(-50%)">
-              <BsChevronRight size={16} />
-            </Box>
-          </Button>
+        <HStack justify="space-between" align="center">
+          <HStack spacing={4}>
+            <Button
+              variant="ghost"
+              color="white"
+              fontSize="16px"
+              fontWeight="500"
+              p={0}
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              gap={0}
+              _hover={{ bg: 'transparent', opacity: 0.8 }}
+              border="1px solid"
+              borderColor="#253340"
+              borderRadius="md"
+              width="140px"
+              height="40px"
+              px={3}
+              position="relative"
+            >
+              <Text color="whiteAlpha.700" fontSize="xs" position="absolute" left={2} top={1}>NFT's</Text>
+              <Text color="white" fontSize="md" position="absolute" left={2} top="70%" transform="translateY(-50%)">All</Text>
+              <Box position="absolute" right={3} top="50%" transform="translateY(-50%)">
+                <BsChevronRight size={16} />
+              </Box>
+            </Button>
+            <Button
+              variant="ghost"
+              color="white"
+              fontSize="16px"
+              fontWeight="500"
+              p={0}
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              gap={0}
+              _hover={{ bg: 'transparent', opacity: 0.8 }}
+              border="1px solid"
+              borderColor="#253340"
+              borderRadius="md"
+              width="140px"
+              height="40px"
+              px={3}
+              position="relative"
+            >
+              <Text color="whiteAlpha.700" fontSize="xs" position="absolute" left={2} top={1}>Модель</Text>
+              <Text color="white" fontSize="md" position="absolute" left={2} top="70%" transform="translateY(-50%)">All</Text>
+              <Box position="absolute" right={3} top="50%" transform="translateY(-50%)">
+                <BsChevronRight size={16} />
+              </Box>
+            </Button>
+          </HStack>
+          <HStack spacing={2}>
+            <IconButton
+              aria-label="Delete"
+              icon={<BsTrash />}
+              variant="ghost"
+              color="white"
+              size="md"
+              _hover={{ bg: 'transparent', opacity: 0.8 }}
+              border="1px solid"
+              borderColor="#253340"
+              borderRadius="md"
+              width="40px"
+              height="40px"
+            />
+            <IconButton
+              aria-label="Sort"
+              icon={<BsChevronDown />}
+              variant="ghost"
+              color="white"
+              size="md"
+              _hover={{ bg: 'transparent', opacity: 0.8 }}
+              border="1px solid"
+              borderColor="#253340"
+              borderRadius="md"
+              width="40px"
+              height="40px"
+            />
+          </HStack>
         </HStack>
       </Box>
 
