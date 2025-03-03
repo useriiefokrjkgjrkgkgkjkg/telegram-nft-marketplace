@@ -161,7 +161,7 @@ export default function Home() {
         borderBottom="1px solid"
         borderColor="#253340"
       >
-        <HStack justify="center" align="center" spacing={4}>
+        <HStack justify="flex-start" align="center" spacing={4}>
           <Button
             variant="ghost"
             color="white"
