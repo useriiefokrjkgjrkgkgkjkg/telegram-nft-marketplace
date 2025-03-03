@@ -83,6 +83,7 @@ export default function Home() {
       right={0}
       bottom={0}
       overflow="hidden"
+      overflowX="hidden"
     >
       {/* Панель с балансом */}
       <Box 
@@ -224,7 +225,7 @@ export default function Home() {
               _hover={{ bg: 'transparent', opacity: 0.8 }}
               border="1px solid"
               borderColor="#253340"
-              borderRadius="md"
+              borderRadius="full"
               width="40px"
               height="40px"
             />
@@ -237,7 +238,7 @@ export default function Home() {
               _hover={{ bg: 'transparent', opacity: 0.8 }}
               border="1px solid"
               borderColor="#253340"
-              borderRadius="md"
+              borderRadius="full"
               width="40px"
               height="40px"
             />
