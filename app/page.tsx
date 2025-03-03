@@ -153,7 +153,7 @@ export default function Home() {
         </HStack>
       </Box>
 
-      {/* Панель навигации */}
+      {/* Панель выбора модели и стиля */}
       <Box 
         bg="#17212B" 
         py={3} 
@@ -176,12 +176,12 @@ export default function Home() {
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
-            width="120px"
+            width="140px"
             height="40px"
             px={3}
           >
             <FaImage size={16} />
-            <Text>NFT</Text>
+            <Text>Модель</Text>
           </Button>
           <Button
             variant="ghost"
@@ -197,12 +197,12 @@ export default function Home() {
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
-            width="120px"
+            width="140px"
             height="40px"
             px={3}
           >
             <FaGift size={16} />
-            <Text>Gifts</Text>
+            <Text>Стиль</Text>
           </Button>
         </HStack>
       </Box>
