@@ -183,7 +183,7 @@ export default function Home() {
           >
             <HStack>
               <FaImage size={16} />
-              <Text>Модель</Text>
+              <Text>NFT's</Text>
             </HStack>
             <BsChevronRight size={16} />
           </Button>
@@ -208,7 +208,7 @@ export default function Home() {
           >
             <HStack>
               <FaGift size={16} />
-              <Text>Стиль</Text>
+              <Text>Model</Text>
             </HStack>
             <BsChevronRight size={16} />
           </Button>
