@@ -164,7 +164,7 @@ export default function Home() {
         <HStack justify="space-between" align="center" spacing={0}>
           <Button
             variant="ghost"
-            color="#0098EA"
+            color="white"
             fontSize="16px"
             fontWeight="500"
             p={0}
@@ -176,15 +176,15 @@ export default function Home() {
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
-            width="100px"
-            height="60px"
+            width="120px"
+            height="50px"
           >
             <FaImage size={20} />
             <Text>NFT</Text>
           </Button>
           <Button
             variant="ghost"
-            color="#0098EA"
+            color="white"
             fontSize="16px"
             fontWeight="500"
             p={0}
@@ -196,15 +196,15 @@ export default function Home() {
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
-            width="100px"
-            height="60px"
+            width="120px"
+            height="50px"
           >
             <FaGift size={20} />
             <Text>Gifts</Text>
           </Button>
           <Button
             variant="ghost"
-            color="#0098EA"
+            color="white"
             fontSize="16px"
             fontWeight="500"
             p={0}
@@ -216,8 +216,8 @@ export default function Home() {
             border="1px solid"
             borderColor="#253340"
             borderRadius="md"
-            width="100px"
-            height="60px"
+            width="120px"
+            height="50px"
           >
             <FaUser size={20} />
             <Text>Profile</Text>
