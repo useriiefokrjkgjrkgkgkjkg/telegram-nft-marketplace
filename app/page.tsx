@@ -91,58 +91,59 @@ export default function Home() {
         borderBottom="1px solid"
         borderColor="#253340"
       >
-        <HStack spacing={2} ml={-1}>
-          <Box
-            width="32px"
-            height="32px"
-            borderRadius="md"
-            border="1px solid"
-            borderColor="whiteAlpha.300"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            bg="whiteAlpha.50"
-          >
-            <Text fontSize="xl" color="white">?</Text>
-          </Box>
-          <Text color="white" fontSize="xl" fontWeight="medium">0</Text>
-          <IconButton
-            aria-label="Add"
-            icon={<AddIcon />}
-            bg="#0098EA"
-            color="white"
-            borderRadius="full"
-            size="md"
-            isDisabled={isWithdrawOpen}
-            onClick={() => {
-              if (!isDepositOpen && !isWithdrawOpen) {
-                onDepositOpen();
-              }
-            }}
-            _hover={{ bg: "#0088D1" }}
-          />
-          <IconButton
-            aria-label="Subtract"
-            icon={<MinusIcon />}
-            bg="#0098EA"
-            color="white"
-            borderRadius="full"
-            size="md"
-            isDisabled={isDepositOpen}
-            onClick={() => {
-              if (!isDepositOpen && !isWithdrawOpen) {
-                onWithdrawOpen();
-              }
-            }}
-            _hover={{ bg: "#0088D1" }}
-          />
+        <HStack justify="space-between" align="center">
+          <HStack spacing={2}>
+            <Box
+              width="32px"
+              height="32px"
+              borderRadius="md"
+              border="1px solid"
+              borderColor="whiteAlpha.300"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              bg="whiteAlpha.50"
+            >
+              <Text fontSize="xl" color="white">?</Text>
+            </Box>
+            <Text color="white" fontSize="xl" fontWeight="medium">0</Text>
+            <IconButton
+              aria-label="Add"
+              icon={<AddIcon />}
+              bg="#0098EA"
+              color="white"
+              borderRadius="full"
+              size="md"
+              isDisabled={isWithdrawOpen}
+              onClick={() => {
+                if (!isDepositOpen && !isWithdrawOpen) {
+                  onDepositOpen();
+                }
+              }}
+              _hover={{ bg: "#0088D1" }}
+            />
+            <IconButton
+              aria-label="Subtract"
+              icon={<MinusIcon />}
+              bg="#0098EA"
+              color="white"
+              borderRadius="full"
+              size="md"
+              isDisabled={isDepositOpen}
+              onClick={() => {
+                if (!isDepositOpen && !isWithdrawOpen) {
+                  onWithdrawOpen();
+                }
+              }}
+              _hover={{ bg: "#0088D1" }}
+            />
+          </HStack>
           <Button
             bg="#0098EA"
             color="white"
             borderRadius="full"
             size="md"
             px={4}
-            ml={-2}
             leftIcon={<StarIcon />}
             _hover={{ bg: "#0088D1" }}
           >
