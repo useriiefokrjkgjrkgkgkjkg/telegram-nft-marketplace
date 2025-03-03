@@ -68,6 +68,25 @@ export default function Home() {
       window.Telegram.WebApp.expand();
       window.Telegram.WebApp.enableClosingConfirmation();
     }
+
+    // Предотвращаем масштабирование
+    const preventDefault = (e: TouchEvent) => {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('touchstart', preventDefault, { passive: false });
+    document.addEventListener('touchmove', preventDefault, { passive: false });
+    document.addEventListener('gesturestart', preventDefault, { passive: false });
+    document.addEventListener('gesturechange', preventDefault, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchstart', preventDefault);
+      document.removeEventListener('touchmove', preventDefault);
+      document.removeEventListener('gesturestart', preventDefault);
+      document.removeEventListener('gesturechange', preventDefault);
+    };
   }, []);
 
   return (
@@ -90,7 +109,16 @@ export default function Home() {
         WebkitUserSelect: 'none',
         WebkitTapHighlightColor: 'transparent',
         WebkitTextSizeAdjust: 'none',
-        WebkitOverflowScrolling: 'touch'
+        WebkitOverflowScrolling: 'touch',
+        touchAction: 'none',
+        userSelect: 'none',
+        WebkitUserModify: 'read-only',
+        WebkitTouchManipulation: 'none',
+        WebkitTransform: 'translateZ(0)',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+        perspective: 1000,
+        WebkitPerspective: 1000
       }}
     >
       {/* Панель с балансом */}
