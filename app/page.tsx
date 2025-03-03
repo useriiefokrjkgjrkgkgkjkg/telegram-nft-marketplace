@@ -83,7 +83,7 @@ export default function Home() {
       bottom={0}
       overflow="hidden"
     >
-      {/* Новая верхняя панель */}
+      {/* Верхняя панель */}
       <Box 
         bg="#17212B" 
         py={4} 
