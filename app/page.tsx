@@ -264,6 +264,7 @@ export default function Home() {
               borderRadius="full"
               width="40px"
               height="40px"
+              ml="-8px"
             />
             <IconButton
               aria-label="Sort"
@@ -277,6 +278,7 @@ export default function Home() {
               borderRadius="full"
               width="40px"
               height="40px"
+              ml="-8px"
             />
           </HStack>
         </HStack>
