@@ -1,5 +1,5 @@
 {
-  "name": "telegram-nft-gifts-marketplace",
+  "name": "nft-marketplace",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,26 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.2.4",
-    "@chakra-ui/next-js": "^2.4.2",
-    "@chakra-ui/react": "^2.10.6",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
+    "@chakra-ui/next-js": "^2.2.0",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "framer-motion": "^10.18.0",
-    "mongoose": "^8.1.0",
-    "next": "14.1.0",
-    "node-telegram-bot-api": "^0.64.0",
+    "next": "14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
-    "@types/node-telegram-bot-api": "^0.64.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "14.1.0",
-    "typescript": "^5.3.0"
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "typescript": "^5.3.3"
   }
 }
