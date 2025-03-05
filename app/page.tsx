@@ -1,24 +1,234 @@
-import { Box, Button, HStack, Text, VStack, useDisclosure, Grid, GridItem, Select, IconButton, SlideFade, Fade } from '@chakra-ui/react'
+'use client'
+
+import { Box, Button, HStack, Text, VStack, useDisclosure, Grid, Select, IconButton, SlideFade, Tabs, TabList, TabPanels, TabPanel, Tab } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import { BsSnow2 } from 'react-icons/bs'
 import { FaGift, FaHammer, FaStar } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
 import { TbActivity } from 'react-icons/tb'
+import { NFTCard } from './components/NFTCard'
+
+interface Gift {
+  id: number
+  title: string
+  price: number
+  image: string
+  isListed: boolean
+}
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('market')
   const [walletAddress, setWalletAddress] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [selectedFilter, setSelectedFilter] = useState('all')
+  const [gifts, setGifts] = useState<Gift[]>([])
+  const [listedTab, setListedTab] = useState(0)
 
   useEffect(() => {
+    fetchGifts()
     setTimeout(() => setIsLoading(false), 500)
   }, [])
+
+  const fetchGifts = async () => {
+    try {
+      const response = await fetch('/api/gifts')
+      const data = await response.json()
+      setGifts(data.gifts)
+    } catch (error) {
+      console.error('Error fetching gifts:', error)
+    }
+  }
 
   const handleTabChange = (tabId: string) => {
     setIsLoading(true)
     setActiveTab(tabId)
     setTimeout(() => setIsLoading(false), 300)
+  }
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'market':
+        return (
+          <Box>
+            <HStack p={3} spacing={3}>
+              <Box 
+                bg="rgba(42, 45, 47, 0.8)"
+                p={2} 
+                borderRadius="md" 
+                flex={1}
+                _hover={{ bg: 'rgba(58, 61, 63, 0.8)', transform: 'translateY(-1px)' }}
+                transition="all 0.2s ease"
+                cursor="pointer"
+                role="group"
+              >
+                <Select 
+                  variant="unstyled" 
+                  defaultValue="all" 
+                  color="white"
+                  fontSize="sm"
+                  onChange={(e) => setSelectedFilter(e.target.value)}
+                  _hover={{ color: 'blue.300' }}
+                  transition="all 0.2s ease"
+                >
+                  <option value="all">NFTs: All</option>
+                  <option value="rare">Rare</option>
+                  <option value="common">Common</option>
+                </Select>
+              </Box>
+              <Box 
+                bg="rgba(42, 45, 47, 0.8)"
+                p={2} 
+                borderRadius="md" 
+                flex={1}
+                _hover={{ bg: 'rgba(58, 61, 63, 0.8)', transform: 'translateY(-1px)' }}
+                transition="all 0.2s ease"
+                cursor="pointer"
+                role="group"
+              >
+                <Select 
+                  variant="unstyled" 
+                  defaultValue="all" 
+                  color="white"
+                  fontSize="sm"
+                  _hover={{ color: 'blue.300' }}
+                  transition="all 0.2s ease"
+                >
+                  <option value="all">Model: All</option>
+                  <option value="new">New</option>
+                  <option value="trending">Trending</option>
+                </Select>
+              </Box>
+            </HStack>
+
+            <Grid templateColumns="repeat(2, 1fr)" gap={3} p={3}>
+              <SlideFade in={!isLoading} offsetY="20px">
+                {gifts.map((gift) => (
+                  <NFTCard
+                    key={gift.id}
+                    id={gift.id}
+                    title={gift.title}
+                    price={gift.price}
+                    image={gift.image}
+                    onBuy={() => console.log('Buy:', gift.id)}
+                  />
+                ))}
+              </SlideFade>
+            </Grid>
+          </Box>
+        )
+
+      case 'gifts':
+        return (
+          <Box p={3}>
+            <Tabs 
+              index={listedTab} 
+              onChange={setListedTab}
+              variant="soft-rounded"
+              colorScheme="blue"
+              bg="rgba(42, 45, 47, 0.8)"
+              p={2}
+              borderRadius="lg"
+            >
+              <TabList gap={2}>
+                <Tab 
+                  _selected={{ 
+                    bg: 'blue.500',
+                    color: 'white'
+                  }}
+                  fontSize="sm"
+                  py={1}
+                  px={4}
+                >
+                  Listed
+                </Tab>
+                <Tab 
+                  _selected={{ 
+                    bg: 'blue.500',
+                    color: 'white'
+                  }}
+                  fontSize="sm"
+                  py={1}
+                  px={4}
+                >
+                  Unlisted
+                </Tab>
+              </TabList>
+              <TabPanels mt={3}>
+                <TabPanel p={0}>
+                  <Grid templateColumns="repeat(2, 1fr)" gap={3}>
+                    {gifts.filter(gift => gift.isListed).map((gift) => (
+                      <NFTCard
+                        key={gift.id}
+                        id={gift.id}
+                        title={gift.title}
+                        price={gift.price}
+                        image={gift.image}
+                        onBuy={() => console.log('Buy:', gift.id)}
+                      />
+                    ))}
+                  </Grid>
+                </TabPanel>
+                <TabPanel p={0}>
+                  <Grid templateColumns="repeat(2, 1fr)" gap={3}>
+                    {gifts.filter(gift => !gift.isListed).map((gift) => (
+                      <NFTCard
+                        key={gift.id}
+                        id={gift.id}
+                        title={gift.title}
+                        price={gift.price}
+                        image={gift.image}
+                        onBuy={() => console.log('Buy:', gift.id)}
+                      />
+                    ))}
+                  </Grid>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+        )
+
+      case 'auctions':
+        return (
+          <Box p={4} textAlign="center">
+            <Text fontSize="lg" color="gray.400">
+              Auctions coming soon!
+            </Text>
+          </Box>
+        )
+
+      case 'activity':
+        return (
+          <Box p={4}>
+            <VStack spacing={3} align="stretch">
+              {[1, 2, 3].map((item) => (
+                <Box 
+                  key={item}
+                  bg="rgba(42, 45, 47, 0.8)"
+                  p={3}
+                  borderRadius="lg"
+                  _hover={{
+                    bg: 'rgba(58, 61, 63, 0.8)',
+                    transform: 'translateX(4px)'
+                  }}
+                  transition="all 0.2s ease"
+                  cursor="pointer"
+                >
+                  <HStack justify="space-between">
+                    <Text fontSize="sm">Transaction #{item}</Text>
+                    <Text fontSize="sm" color="blue.300">0.55 TON</Text>
+                  </HStack>
+                  <Text fontSize="xs" color="gray.400" mt={1}>
+                    2 hours ago
+                  </Text>
+                </Box>
+              ))}
+            </VStack>
+          </Box>
+        )
+
+      default:
+        return null
+    }
   }
 
   return (
@@ -91,139 +301,7 @@ export default function Home() {
 
       {/* Main Content */}
       <Box pt="60px" pb="70px">
-        {/* Filters */}
-        <HStack p={3} spacing={3}>
-          <Box 
-            bg="rgba(42, 45, 47, 0.8)"
-            p={2} 
-            borderRadius="md" 
-            flex={1}
-            _hover={{ bg: 'rgba(58, 61, 63, 0.8)', transform: 'translateY(-1px)' }}
-            transition="all 0.2s ease"
-            cursor="pointer"
-            role="group"
-          >
-            <Select 
-              variant="unstyled" 
-              defaultValue="all" 
-              color="white"
-              fontSize="sm"
-              onChange={(e) => setSelectedFilter(e.target.value)}
-              _hover={{ color: 'blue.300' }}
-              transition="all 0.2s ease"
-            >
-              <option value="all">NFTs: All</option>
-              <option value="rare">Rare</option>
-              <option value="common">Common</option>
-            </Select>
-          </Box>
-          <Box 
-            bg="rgba(42, 45, 47, 0.8)"
-            p={2} 
-            borderRadius="md" 
-            flex={1}
-            _hover={{ bg: 'rgba(58, 61, 63, 0.8)', transform: 'translateY(-1px)' }}
-            transition="all 0.2s ease"
-            cursor="pointer"
-            role="group"
-          >
-            <Select 
-              variant="unstyled" 
-              defaultValue="all" 
-              color="white"
-              fontSize="sm"
-              _hover={{ color: 'blue.300' }}
-              transition="all 0.2s ease"
-            >
-              <option value="all">Model: All</option>
-              <option value="new">New</option>
-              <option value="trending">Trending</option>
-            </Select>
-          </Box>
-        </HStack>
-
-        {/* NFT Grid */}
-        <Grid templateColumns="repeat(2, 1fr)" gap={3} p={3}>
-          <SlideFade in={!isLoading} offsetY="20px">
-            {[1, 2, 3, 4].map((item) => (
-              <Box 
-                key={item} 
-                bg="rgba(42, 45, 47, 0.8)"
-                borderRadius="xl" 
-                overflow="hidden"
-                _hover={{ 
-                  transform: 'translateY(-4px)',
-                  shadow: '2xl',
-                  bg: 'rgba(58, 61, 63, 0.8)'
-                }}
-                transition="all 0.3s ease"
-                cursor="pointer"
-                role="group"
-              >
-                <Box 
-                  bg={["#8B6E63", "#78909C", "#7E57C2", "#26A69A"][item-1]} 
-                  h="150px"
-                  position="relative"
-                  overflow="hidden"
-                  _after={{
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    bg: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%)',
-                    opacity: 0,
-                    transition: 'opacity 0.3s ease'
-                  }}
-                  _groupHover={{
-                    _after: {
-                      opacity: 1
-                    }
-                  }}
-                />
-                <VStack p={3} align="start" spacing={1}>
-                  <Text 
-                    fontSize="sm" 
-                    fontWeight="500"
-                    _groupHover={{ color: 'blue.300' }}
-                    transition="all 0.2s ease"
-                  >
-                    Desk Calendar
-                  </Text>
-                  <Text fontSize="xs" color="gray.400">#{184029 + (item-1)*36}</Text>
-                  <Button 
-                    w="full" 
-                    bg="rgba(59, 130, 246, 0.9)"
-                    color="white"
-                    size="sm"
-                    fontSize="sm"
-                    h="32px"
-                    _hover={{ 
-                      bg: 'blue.500',
-                      transform: 'scale(1.02)'
-                    }}
-                    _active={{
-                      bg: 'blue.600',
-                      transform: 'scale(0.98)'
-                    }}
-                    transition="all 0.2s ease"
-                  >
-                    0.55 
-                    <Box 
-                      as={FaStar} 
-                      size={12} 
-                      ml={1}
-                      transform="rotate(0deg)"
-                      _groupHover={{ transform: 'rotate(180deg)' }}
-                      transition="transform 0.6s ease"
-                    />
-                  </Button>
-                </VStack>
-              </Box>
-            ))}
-          </SlideFade>
-        </Grid>
+        {renderContent()}
       </Box>
 
       {/* Navigation */}
