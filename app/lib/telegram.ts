@@ -1,10 +1,10 @@
 const TELEGRAM_API = 'https://api.telegram.org/bot';
 
-if (!process.env.TELEGRAM_BOT_TOKEN) {
-  throw new Error('TELEGRAM_BOT_TOKEN is not defined');
-}
-
 export async function sendMessage(chatId: number, text: string) {
+  if (!process.env.TELEGRAM_BOT_TOKEN) {
+    throw new Error('TELEGRAM_BOT_TOKEN is not defined');
+  }
+
   console.log('Sending message:', { chatId, text });
   
   try {
@@ -36,6 +36,10 @@ export async function sendMessage(chatId: number, text: string) {
 }
 
 export async function setWebhook(url: string) {
+  if (!process.env.TELEGRAM_BOT_TOKEN) {
+    throw new Error('TELEGRAM_BOT_TOKEN is not defined');
+  }
+
   console.log('Setting webhook to:', url);
   
   try {
