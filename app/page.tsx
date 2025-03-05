@@ -1,10 +1,9 @@
 import { Box, Button, HStack, Text, VStack, useDisclosure, Grid, GridItem, Select, IconButton } from '@chakra-ui/react'
 import { useState } from 'react'
 import { BsSnow2 } from 'react-icons/bs'
-import { FaGift, FaHammer } from 'react-icons/fa'
+import { FaGift, FaHammer, FaStar } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
 import { TbActivity } from 'react-icons/tb'
-import { TonLogo } from './components/TonLogo'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('market')
@@ -29,7 +28,7 @@ export default function Home() {
         }}
       >
         <HStack spacing={2}>
-          <TonLogo w="20px" h="20px" />
+          <FaStar size={16} />
           <Text fontSize="sm">0.087</Text>
           <IconButton 
             aria-label="Add" 
@@ -51,7 +50,7 @@ export default function Home() {
         <Button 
           size="sm"
           colorScheme="blue"
-          leftIcon={<TonLogo w="16px" h="16px" />}
+          leftIcon={<FaStar size={14} />}
           _hover={{ bg: 'blue.500' }}
           transition="all 0.2s"
           px={3}
@@ -127,7 +126,7 @@ export default function Home() {
                   fontSize="sm"
                   h="32px"
                 >
-                  0.55 <TonLogo w="14px" h="14px" ml={1} />
+                  0.55 <FaStar size={12} style={{ marginLeft: '4px' }} />
                 </Button>
               </VStack>
             </Box>
