@@ -628,64 +628,62 @@ export default function Home() {
     );
   };
 
-  const Navigation = () => {
-    return (
-      <Box 
-        position="fixed" 
-        bottom={0} 
-        left={0} 
-        right={0} 
-        bg="#1C1C1E"
-        borderTop="1px solid #2C2C2E"
-        px={4}
-        py={2}
-        zIndex={1000}
-      >
-        <HStack justify="space-between">
-          <VStack 
-            spacing={1} 
-            cursor="pointer"
-            onClick={() => setActiveTab('market')}
-            opacity={activeTab === 'market' ? 1 : 0.5}
-            transition="opacity 0.2s"
-          >
-            <FaImage color={activeTab === 'market' ? '#0A84FF' : '#8E8E93'} size={24} />
-            <Text color={activeTab === 'market' ? '#0A84FF' : '#8E8E93'} fontSize="sm">Market</Text>
-          </VStack>
-          <VStack 
-            spacing={1}
-            cursor="pointer"
-            onClick={() => setActiveTab('auctions')}
-            opacity={activeTab === 'auctions' ? 1 : 0.5}
-            transition="opacity 0.2s"
-          >
-            <FaGavel color={activeTab === 'auctions' ? '#0A84FF' : '#8E8E93'} size={24} />
-            <Text color={activeTab === 'auctions' ? '#0A84FF' : '#8E8E93'} fontSize="sm">Auctions</Text>
-          </VStack>
-          <VStack 
-            spacing={1}
-            cursor="pointer"
-            onClick={() => setActiveTab('gifts')}
-            opacity={activeTab === 'gifts' ? 1 : 0.5}
-            transition="opacity 0.2s"
-          >
-            <FaGift color={activeTab === 'gifts' ? '#0A84FF' : '#8E8E93'} size={24} />
-            <Text color={activeTab === 'gifts' ? '#0A84FF' : '#8E8E93'} fontSize="sm">My Gifts</Text>
-          </VStack>
-          <VStack 
-            spacing={1}
-            cursor="pointer"
-            onClick={() => setActiveTab('activity')}
-            opacity={activeTab === 'activity' ? 1 : 0.5}
-            transition="opacity 0.2s"
-          >
-            <BsActivity color={activeTab === 'activity' ? '#0A84FF' : '#8E8E93'} size={24} />
-            <Text color={activeTab === 'activity' ? '#0A84FF' : '#8E8E93'} fontSize="sm">Activity</Text>
-          </VStack>
-        </HStack>
-      </Box>
-    );
-  };
+  const Navigation = () => (
+    <Box 
+      position="fixed" 
+      bottom={0} 
+      left={0} 
+      right={0} 
+      bg="#1C1C1E"
+      borderTop="1px solid #2C2C2E"
+      px={4}
+      py={2}
+      zIndex={1000}
+    >
+      <HStack justify="space-between">
+        <VStack 
+          spacing={1} 
+          cursor="pointer"
+          onClick={() => setActiveTab('market')}
+          opacity={activeTab === 'market' ? 1 : 0.5}
+          transition="opacity 0.2s"
+        >
+          <FaImage color={activeTab === 'market' ? '#0A84FF' : '#8E8E93'} size={24} />
+          <Text color={activeTab === 'market' ? '#0A84FF' : '#8E8E93'} fontSize="sm">Market</Text>
+        </VStack>
+        <VStack 
+          spacing={1}
+          cursor="pointer"
+          onClick={() => setActiveTab('auctions')}
+          opacity={activeTab === 'auctions' ? 1 : 0.5}
+          transition="opacity 0.2s"
+        >
+          <FaGavel color={activeTab === 'auctions' ? '#0A84FF' : '#8E8E93'} size={24} />
+          <Text color={activeTab === 'auctions' ? '#0A84FF' : '#8E8E93'} fontSize="sm">Auctions</Text>
+        </VStack>
+        <VStack 
+          spacing={1}
+          cursor="pointer"
+          onClick={() => setActiveTab('gifts')}
+          opacity={activeTab === 'gifts' ? 1 : 0.5}
+          transition="opacity 0.2s"
+        >
+          <FaGift color={activeTab === 'gifts' ? '#0A84FF' : '#8E8E93'} size={24} />
+          <Text color={activeTab === 'gifts' ? '#0A84FF' : '#8E8E93'} fontSize="sm">My Gifts</Text>
+        </VStack>
+        <VStack 
+          spacing={1}
+          cursor="pointer"
+          onClick={() => setActiveTab('activity')}
+          opacity={activeTab === 'activity' ? 1 : 0.5}
+          transition="opacity 0.2s"
+        >
+          <BsActivity color={activeTab === 'activity' ? '#0A84FF' : '#8E8E93'} size={24} />
+          <Text color={activeTab === 'activity' ? '#0A84FF' : '#8E8E93'} fontSize="sm">Activity</Text>
+        </VStack>
+      </HStack>
+    </Box>
+  );
 
   return (
     <Box minH="100vh" bg="#000000" pb={20}>
