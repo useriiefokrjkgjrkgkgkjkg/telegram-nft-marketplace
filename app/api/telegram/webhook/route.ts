@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { commands, setWebhook } from '../../../lib/telegram';
+import { commands } from '../../../lib/telegram';
 
 export async function POST(request: Request) {
   try {
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       console.log('Received message:', text);
 
       // Обработка команд
-      if (text.startsWith('/')) {
+      if (text?.startsWith('/')) {
         const command = text.substring(1);
         if (command in commands) {
           await commands[command as keyof typeof commands](chatId);
@@ -27,14 +27,4 @@ export async function POST(request: Request) {
     console.error('Error processing webhook:', error);
     return NextResponse.json({ ok: false }, { status: 500 });
   }
-}
-
-// Установка вебхука при старте сервера
-if (process.env.VERCEL_URL) {
-  const webhookUrl = `https://${process.env.VERCEL_URL}/api/telegram/webhook`;
-  setWebhook(webhookUrl).then(() => {
-    console.log('Webhook set to:', webhookUrl);
-  }).catch((error) => {
-    console.error('Failed to set webhook:', error);
-  });
 } 
