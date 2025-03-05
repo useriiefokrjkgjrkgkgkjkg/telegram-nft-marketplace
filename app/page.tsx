@@ -26,20 +26,22 @@ import { BsThreeDots, BsChevronRight, BsTrash, BsChevronDown, BsActivity } from 
 import { FaImage, FaGift, FaGavel } from 'react-icons/fa';
 import StartCommand from './components/StartCommand';
 
+interface TelegramWebApp {
+  expand: () => void;
+  enableClosingConfirmation: () => void;
+  close: () => void;
+  initDataUnsafe?: {
+    user?: {
+      photo_url?: string;
+    };
+  };
+}
+
 // Объявляем типы для Telegram WebApp и TonKeeper
 declare global {
   interface Window {
     Telegram?: {
-      WebApp?: {
-        expand?: () => void;
-        enableClosingConfirmation?: () => void;
-        close?: () => void;
-        initDataUnsafe?: {
-          user?: {
-            photo_url?: string;
-          };
-        };
-      };
+      WebApp: TelegramWebApp;
     };
     ton?: {
       send: (method: string, params?: any[]) => Promise<any>;
