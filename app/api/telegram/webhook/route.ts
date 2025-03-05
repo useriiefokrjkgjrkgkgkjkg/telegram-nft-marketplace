@@ -2,22 +2,30 @@ import { NextResponse } from 'next/server';
 import { commands } from '../../../lib/telegram';
 
 export async function POST(request: Request) {
+  console.log('Webhook handler started');
+  
   try {
     const update = await request.json();
-    console.log('Received update:', JSON.stringify(update, null, 2));
+    console.log('Received update:', update);
     
-    // Обработка входящих сообщений
+    if (!process.env.TELEGRAM_BOT_TOKEN) {
+      console.error('TELEGRAM_BOT_TOKEN is not defined');
+      return NextResponse.json({ ok: false, error: 'Token not configured' }, { status: 200 });
+    }
+
     if (update.message) {
       const chatId = update.message.chat.id;
-      const text = update.message.text;
+      const text = update.message.text || '';
 
       console.log('Processing message:', { chatId, text });
 
-      // Обработка команды "старт"
-      if (text === '/start' || text === 'старт') {
-        console.log('Executing start command for chat:', chatId);
-        await commands.start(chatId);
-        return NextResponse.json({ ok: true });
+      if (text.toLowerCase() === '/start' || text.toLowerCase() === 'старт') {
+        try {
+          await commands.start(chatId);
+          console.log('Start command executed successfully');
+        } catch (error) {
+          console.error('Error executing start command:', error);
+        }
       }
 
       // Обработка других команд
@@ -41,7 +49,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error('Error processing webhook:', error);
-    return NextResponse.json({ ok: false }, { status: 500 });
+    console.error('Error in webhook handler:', error);
+    return NextResponse.json({ ok: true });
   }
 } 
