@@ -1,4 +1,4 @@
-import { Providers } from './components/Providers'
+import { Providers } from './providers'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'NFT Marketplace',
-  description: 'Telegram NFT Marketplace',
+  description: 'Buy and sell NFT gifts',
 }
 
 export default function RootLayout({
