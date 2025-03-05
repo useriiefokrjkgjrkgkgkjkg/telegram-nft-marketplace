@@ -1,0 +1,1 @@
+import { ChakraProvider } from "@chakra-ui/react"; export const metadata = { title: "NFT Market", description: "Маркетплейс NFT-подарков Telegram" }; export default function RootLayout({ children }) { return ( <html lang="ru"><body><ChakraProvider>{children}</ChakraProvider></body></html> ); }
