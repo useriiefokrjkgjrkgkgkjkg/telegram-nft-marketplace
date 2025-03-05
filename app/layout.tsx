@@ -1,12 +1,9 @@
-import { Providers } from './providers'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'NFT Marketplace',
-  description: 'Buy and sell NFT gifts',
+  title: 'NFT Market',
+  description: 'NFT Marketplace on TON',
 }
 
 export default function RootLayout({
@@ -15,11 +12,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-          {children}
-        </Providers>
+    <html lang="ru">
+      <body>
+        {children}
       </body>
     </html>
   )
