@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import bot from '../../../lib/telegram';
+import { commands, setWebhook } from '../../../lib/telegram';
 
 export async function POST(request: Request) {
   try {
@@ -12,6 +12,14 @@ export async function POST(request: Request) {
 
       // Здесь можно добавить дополнительную логику обработки сообщений
       console.log('Received message:', text);
+
+      // Обработка команд
+      if (text.startsWith('/')) {
+        const command = text.substring(1);
+        if (command in commands) {
+          await commands[command as keyof typeof commands](chatId);
+        }
+      }
     }
 
     return NextResponse.json({ ok: true });
@@ -22,12 +30,11 @@ export async function POST(request: Request) {
 }
 
 // Установка вебхука при старте сервера
-const webhookUrl = process.env.VERCEL_URL 
-  ? `https://${process.env.VERCEL_URL}/api/telegram/webhook`
-  : 'https://your-domain.com/api/telegram/webhook';
-
-bot.setWebHook(webhookUrl).then(() => {
-  console.log('Webhook set to:', webhookUrl);
-}).catch((error) => {
-  console.error('Failed to set webhook:', error);
-}); 
+if (process.env.VERCEL_URL) {
+  const webhookUrl = `https://${process.env.VERCEL_URL}/api/telegram/webhook`;
+  setWebhook(webhookUrl).then(() => {
+    console.log('Webhook set to:', webhookUrl);
+  }).catch((error) => {
+    console.error('Failed to set webhook:', error);
+  });
+} 
