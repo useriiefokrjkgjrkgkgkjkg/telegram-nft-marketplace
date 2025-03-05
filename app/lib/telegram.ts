@@ -1,6 +1,6 @@
 const TELEGRAM_API = 'https://api.telegram.org/bot';
 
-export async function sendMessage(chatId: number, text: string) {
+export async function sendMessage(chatId: number, text: string, options?: any) {
   if (!process.env.TELEGRAM_BOT_TOKEN) {
     throw new Error('TELEGRAM_BOT_TOKEN is not defined');
   }
@@ -17,6 +17,7 @@ export async function sendMessage(chatId: number, text: string) {
         chat_id: chatId,
         text: text,
         parse_mode: 'HTML',
+        ...options,
       }),
     });
 
@@ -73,14 +74,17 @@ export const commands = {
   start: async (chatId: number) => {
     return sendMessage(
       chatId,
-      `Добро пожаловать в NFT Marketplace! 🎁
-
-Здесь вы можете:
-• Покупать и продавать NFT подарки
-• Участвовать в аукционах
-• Отслеживать свои транзакции
-
-Используйте команду /help чтобы увидеть список всех доступных команд.`
+      `ТЕСТ`,
+      {
+        reply_markup: {
+          inline_keyboard: [[
+            {
+              text: "Открыть мини-приложение",
+              web_app: { url: `https://nftmarket-peach.vercel.app` }
+            }
+          ]]
+        }
+      }
     );
   },
   
