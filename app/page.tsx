@@ -718,7 +718,164 @@ export default function Home() {
             </Button>
           </VStack>
         ) : (
-          <Text color="white">Wallet connected: {walletAddress}</Text>
+          <>
+            {activeTab === 'market' && (
+              <Box
+                display="grid"
+                gridTemplateColumns="repeat(2, 1fr)"
+                gap={3}
+              >
+                {marketNFTs.map((nft) => (
+                  <Box
+                    key={nft.id}
+                    bg="linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(36,36,36,0.95) 100%)"
+                    backdropFilter="blur(10px)"
+                    borderRadius="xl"
+                    overflow="hidden"
+                    border="1px solid rgba(255,255,255,0.1)"
+                    cursor="pointer"
+                    position="relative"
+                    transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+                    _hover={{
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 8px 20px rgba(0, 152, 234, 0.2)',
+                      borderColor: '#0098EA'
+                    }}
+                    onClick={() => handleBuyNFT(nft)}
+                  >
+                    <Box
+                      height="160px"
+                      bg="linear-gradient(135deg, rgba(0, 152, 234, 0.05) 0%, rgba(23, 33, 43, 0.1) 100%)"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      position="relative"
+                      overflow="hidden"
+                    >
+                      <Text 
+                        color="white" 
+                        fontSize="2xl" 
+                        fontWeight="bold"
+                      >
+                        {nft.name}
+                      </Text>
+                    </Box>
+                    <Box p={3}>
+                      <Text color="white" fontSize="sm">{nft.number}</Text>
+                      <HStack mt={2}>
+                        <TonLogo size="16px" />
+                        <Text color="white" fontSize="sm">{nft.price}</Text>
+                      </HStack>
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
+            )}
+
+            {activeTab === 'auctions' && (
+              <Text color="white" fontSize="2xl" textAlign="center">
+                Auctions coming soon
+              </Text>
+            )}
+
+            {activeTab === 'gifts' && (
+              <>
+                <HStack spacing={4} mb={6}>
+                  <Box
+                    flex={1}
+                    p={3}
+                    bg={activeGiftsTab === 'listed' ? '#0A84FF' : 'transparent'}
+                    color="white"
+                    borderRadius="xl"
+                    cursor="pointer"
+                    textAlign="center"
+                    onClick={() => setActiveGiftsTab('listed')}
+                    transition="all 0.3s"
+                    _hover={{
+                      bg: activeGiftsTab === 'listed' ? '#0A84FF' : 'rgba(255,255,255,0.1)'
+                    }}
+                  >
+                    <Text>Listed Gifts</Text>
+                  </Box>
+                  <Box
+                    flex={1}
+                    p={3}
+                    bg={activeGiftsTab === 'unlisted' ? '#0A84FF' : 'transparent'}
+                    color="white"
+                    borderRadius="xl"
+                    cursor="pointer"
+                    textAlign="center"
+                    onClick={() => setActiveGiftsTab('unlisted')}
+                    transition="all 0.3s"
+                    _hover={{
+                      bg: activeGiftsTab === 'unlisted' ? '#0A84FF' : 'rgba(255,255,255,0.1)'
+                    }}
+                  >
+                    <Text>Unlisted Gifts</Text>
+                  </Box>
+                </HStack>
+                {filteredGifts.length > 0 ? (
+                  <Box
+                    display="grid"
+                    gridTemplateColumns="repeat(2, 1fr)"
+                    gap={3}
+                  >
+                    {filteredGifts.map((gift) => (
+                      <Box
+                        key={gift.id}
+                        bg="linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(36,36,36,0.95) 100%)"
+                        backdropFilter="blur(10px)"
+                        borderRadius="xl"
+                        overflow="hidden"
+                        border="1px solid rgba(255,255,255,0.1)"
+                        cursor="pointer"
+                        position="relative"
+                        transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+                        _hover={{
+                          transform: 'translateY(-4px)',
+                          boxShadow: '0 8px 20px rgba(0, 152, 234, 0.2)',
+                          borderColor: '#0098EA'
+                        }}
+                      >
+                        <Box
+                          height="160px"
+                          bg="linear-gradient(135deg, rgba(0, 152, 234, 0.05) 0%, rgba(23, 33, 43, 0.1) 100%)"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          position="relative"
+                          overflow="hidden"
+                        >
+                          <Text 
+                            color="white" 
+                            fontSize="2xl" 
+                            fontWeight="bold"
+                          >
+                            {gift.name}
+                          </Text>
+                        </Box>
+                        <Box p={3}>
+                          <Text color="white" fontSize="sm">{gift.number}</Text>
+                          {gift.price && (
+                            <HStack mt={2}>
+                              <TonLogo size="16px" />
+                              <Text color="white" fontSize="sm">{gift.price}</Text>
+                            </HStack>
+                          )}
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
+                ) : (
+                  <Text color="white" fontSize="2xl" fontWeight="bold" textAlign="center">
+                    No gifts found
+                  </Text>
+                )}
+              </>
+            )}
+
+            {activeTab === 'activity' && <ActivityList />}
+          </>
         )}
       </Box>
     </Box>
