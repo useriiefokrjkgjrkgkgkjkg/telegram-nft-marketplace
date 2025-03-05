@@ -1,47 +1,36 @@
-import { NextResponse } from 'next/server';
-import TelegramBot from 'node-telegram-bot-api';
-
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN!, { polling: false });
+import { NextResponse } from 'next/server'
 
 export async function GET() {
-  try {
-    // В будущем здесь будет реальная логика получения подарков
-    const mockGifts = [
+  // Здесь будет логика получения подарков
+  return NextResponse.json({
+    gifts: [
       {
-        id: '1',
-        name: 'Золотое сердце',
-        imageUrl: 'https://placekitten.com/200/200',
-        stars: 25,
-        level: 2,
-        owner: '@PalmAngeleges'
+        id: 1,
+        title: 'Desk Calendar',
+        price: 0.55,
+        image: '/images/calendar1.jpg',
+        isListed: true
+      },
+      {
+        id: 2,
+        title: 'Wall Calendar',
+        price: 0.75,
+        image: '/images/calendar2.jpg',
+        isListed: false
       }
-    ];
-
-    return NextResponse.json(mockGifts);
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Произошла ошибка при получении подарков' },
-      { status: 500 }
-    );
-  }
+    ]
+  })
 }
 
 export async function POST(request: Request) {
-  try {
-    const data = await request.json();
-    
-    // Здесь будет логика обработки нового подарка
-    // и отправка уведомления в Telegram
-    
-    await bot.sendMessage(process.env.TELEGRAM_ADMIN_USERNAME!, 
-      `Новый подарок добавлен в маркет: ${data.name}`
-    );
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Произошла ошибка при добавлении подарка' },
-      { status: 500 }
-    );
-  }
+  const data = await request.json()
+  
+  // Здесь будет логика создания нового подарка
+  return NextResponse.json({
+    success: true,
+    gift: {
+      id: Math.random(),
+      ...data
+    }
+  })
 } 
