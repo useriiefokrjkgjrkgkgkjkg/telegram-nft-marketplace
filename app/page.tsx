@@ -4,7 +4,7 @@ import { BsSnow2 } from 'react-icons/bs'
 import { FaGift, FaHammer } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
 import { TbActivity } from 'react-icons/tb'
-import { TonLogo } from '@/components/TonLogo'
+import { TonLogo } from './components/TonLogo'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('market')
