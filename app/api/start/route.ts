@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server';
 
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const BOT_USERNAME = process.env.TELEGRAM_BOT_USERNAME;
-
-if (!TELEGRAM_BOT_TOKEN) {
-  throw new Error('TELEGRAM_BOT_TOKEN is not defined in environment variables');
-}
-
-if (!BOT_USERNAME) {
-  throw new Error('TELEGRAM_BOT_USERNAME is not defined in environment variables');
-}
-
 export async function POST(request: Request) {
   try {
+    const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+    const BOT_USERNAME = process.env.TELEGRAM_BOT_USERNAME;
+
+    if (!TELEGRAM_BOT_TOKEN) {
+      throw new Error('TELEGRAM_BOT_TOKEN is not defined in environment variables');
+    }
+
+    if (!BOT_USERNAME) {
+      throw new Error('TELEGRAM_BOT_USERNAME is not defined in environment variables');
+    }
+
     // В реальном приложении здесь будет отправка сообщения через Telegram Bot API
     // const telegramResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
     //   method: 'POST',
