@@ -13,10 +13,14 @@ export async function POST(request: Request) {
 
       console.log('Processing message:', { chatId, text });
 
-      // Здесь можно добавить дополнительную логику обработки сообщений
-      console.log('Received message:', text);
+      // Обработка команды "старт"
+      if (text === '/start' || text === 'старт') {
+        console.log('Executing start command for chat:', chatId);
+        await commands.start(chatId);
+        return NextResponse.json({ ok: true });
+      }
 
-      // Обработка команд
+      // Обработка других команд
       if (text?.startsWith('/')) {
         const command = text.substring(1);
         console.log('Processing command:', command);
