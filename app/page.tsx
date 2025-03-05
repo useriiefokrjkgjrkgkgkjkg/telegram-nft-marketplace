@@ -2,11 +2,10 @@ import Header from './components/Header';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#1C1E22]">
+    <main className="max-w-[390px] mx-auto min-h-screen bg-[#1C1E22] flex flex-col">
       <Header />
-      <div className="flex items-center justify-center h-[calc(100vh-48px)]">
-        <h1 className="text-white text-6xl font-bold">Soon...</h1>
-      </div>
+      <div className="flex-1" />
+      <div className="h-1 bg-[#252A31] rounded-full mx-auto w-32 mb-2" />
     </main>
   );
 } 
